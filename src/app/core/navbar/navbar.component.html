@@ -1,0 +1,96 @@
+
+<ng-template #navlinks>
+  <a mat-button class="navbar-item mat-title-medium has-text-link ">Accounts</a>
+  <a mat-button class="navbar-item mat-title-medium has-text-link ">Credit Cards</a>
+  <a mat-button class="navbar-item mat-title-medium has-text-link ">Mortgages</a>
+  <a mat-button class="navbar-item mat-title-medium has-text-link ">Loans</a>
+  <a mat-button class="navbar-item mat-title-medium has-text-link ">Investments</a>
+  <a mat-button class="navbar-item mat-title-medium has-text-link ">Rewards</a>
+  <a mat-button class="navbar-item mat-title-medium has-text-link mx-auto">Advise</a>
+
+</ng-template>
+
+<mat-sidenav-container class="sidenav-container">
+  <!--mobile side nav starts here-->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      opened="false"
+      position="end"
+      >
+    <!-- mobile menu -->
+    <mat-nav-list >
+      <ng-template [ngTemplateOutlet]="navlinks"></ng-template>
+    </mat-nav-list>
+   
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+   <!--hamburger-->
+      <div class="container">
+        <nav class="navbar">
+          <div class="navbar-brand ">
+            <!-- <img src="logo.png"  aria-label="brand logo" alt="brand-logo"/> -->
+             <a class="navbar-item">
+              Slim Financial
+             </a>
+            @if (isHandset$ | async) {
+            <button mat-flat-button class="has-background-warning  has-text-black p-5 mt-1">
+              <mat-icon class="has-text-black">lock</mat-icon>
+              sign in
+            </button>
+            <a role="button" class="navbar-burger ml-5">
+             
+                <button
+                  type="button"
+                  aria-label="Toggle sidenav"
+                  mat-icon-button
+                  (click)="drawer.toggle()">
+                  <mat-icon class="has-text-warning" aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+             
+            </a>
+          }
+          </div>
+          <div class="container is-flex is-justify-content-end top-nav is-align-content-center is-hidden-touch">
+            <p class="mat-title-large has-text-white has-text-weight-light p-2">
+              <mat-icon matPrefix>search</mat-icon>
+              Search Slim Financial...
+            </p>
+            <p class="mat-body-large pt-3 has-text-white mr-6">
+              <mat-icon matPrefix>chevron</mat-icon>
+              Contact Us
+            </p>
+            <p class="mat-body-large pt-3 mt-2 has-text-white mr-6">EN</p>
+            <button mat-flat-button class="has-background-warning mt-3">sign in</button>
+          </div>
+        </nav>
+        
+        
+  
+      </div>
+   
+   
+
+      
+    </mat-toolbar>
+    <mat-toolbar class="has-background-white is-hidden-mobile">
+      <div class="container is-flex is-justify-content-end top-nav">
+        <div class="navbar-menu">
+          <div class="navbar-end pt-5">
+            <a mat-button class="navbar-item mat-title-medium has-text-link ">Accounts</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link ">Credit Cards</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link ">Mortgages</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link ">Loans</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link ">Investments</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link ">Rewards</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link mx-auto">Advise</a>
+            <a mat-button class="navbar-item mat-title-medium has-text-link mx-auto"> <mat-icon>more_vert</mat-icon></a>
+          </div>
+      </div>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
