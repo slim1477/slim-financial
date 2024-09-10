@@ -1,0 +1,12 @@
+mat-drawer-content{
+    height: 100vh;
+    overflow: hidden;
+}
+mat-drawer{
+    height: 50vh;
+    width: 50vw;
+    border-radius: 0%!important;
+}
+mat-list-item{
+    border-radius: 0%!important;
+}

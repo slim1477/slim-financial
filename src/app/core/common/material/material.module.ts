@@ -4,6 +4,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 const material = [
@@ -12,6 +14,8 @@ const material = [
   MatButtonModule,
   MatSidenavModule,
   MatListModule,
+  MatMenuModule,
+  MatDividerModule
 ]
 
 @NgModule({
