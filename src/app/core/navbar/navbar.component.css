@@ -9,6 +9,7 @@ img{
 .navbar{
   background: transparent;
 }
+
 .navbar-item{
   margin-right: 60px;
   background-color: transparent !important;
@@ -26,6 +27,9 @@ img{
 }
 .top-nav > p:first-child{
   border-bottom:1px solid white ;
+}
+.bottom-nav{
+  border-bottom: 2px solid rgba(97, 97, 99, 0.5);
 }
 button{
   border: 1px solid white;

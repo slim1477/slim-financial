@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HeroComponent } from './core/hero/hero.component';
 import { MaterialModule } from './core/common/material/material.module';
+import { ProductsComponent } from './core/products/products.component';
 
 
 
@@ -11,7 +12,7 @@ import { MaterialModule } from './core/common/material/material.module';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavbarComponent,HeroComponent,MaterialModule],
+  imports: [RouterOutlet,MaterialModule,NavbarComponent,HeroComponent,ProductsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -22,5 +23,6 @@ export class AppComponent {
 
   handleIsOpen(e: boolean){
     this.isOpen = e;
+    console.log(e);
   }
 }

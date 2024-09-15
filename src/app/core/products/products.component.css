@@ -1,0 +1,115 @@
+.section{
+    background-color: #deecfa;
+}
+mat-card{
+    border: 1px solid #c2bdbd;
+    border-radius: 0%;
+}
+mat-list-item,mat-card-title,mat-card-content > p{
+  margin-bottom: 1.5em;
+}
+#investments{
+    background-image: url("../../../../public/investments.png");
+    background-repeat: no-repeat;
+}
+#accounts{
+    background-image: url("../../../../public/account.png");
+    background-repeat: no-repeat;
+}
+#loans{
+    background-image: url("../../../../public/loans.png");
+    background-repeat: no-repeat;
+    background-size: 3em;
+}
+#mortgages{
+    background-image: url("../../../../public/mortgages.png");
+    background-repeat: no-repeat;
+    background-size: 2em;
+}
+#credit-cards{
+    background-image: url("../../../../public/credit-cards.png");
+    background-repeat: no-repeat;
+    background-size: 3em;
+}
+#information{
+    background-image: url("../../../../public/information.png");
+    background-repeat: no-repeat;
+    background-size: 2.5em;
+}
+#mouse{
+    background-image: url("../../../../public/mouse.png");
+    background-repeat: no-repeat;
+    background-size: 1.9em;
+}
+mat-list-item p {
+    color: blue;
+    position: relative;
+    display: inline-block;
+    padding-left: 55px;
+    line-height: inherit;
+    width: max-content;
+}
+mat-list-item p::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -20px;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    content: "";
+}
+.panel-block{
+    width: max-content;
+}
+.panel-block:not(:last-child){
+    border: none;
+}
+#mouse > img{
+    width: 1.8em;
+}
+ .content{
+    float: right;
+    background-color: red;
+    margin-left: 0%;
+ }
+.form-container{
+    position: relative;
+    top:-50px;
+    border: none;
+}
+label:first-of-type::after{
+    content:"";
+    width: 5%;
+    position: absolute;
+    top: 65px;
+    left: 25px;
+    border-bottom: 4px solid yellow;
+}
+input:first-of-type{
+    width: 73%;
+}
+input:first-of-type::placeholder{
+    font-size: large;
+    font-weight: lighter;
+}
+@media screen and (max-width: 768px) {
+    .form-container{
+        position:unset;
+        margin-bottom: 1em;
+    }
+    input:first-of-type{
+        width: 75%;
+        margin-top: 15px;
+    }
+    label:first-of-type::after{
+        content:"";
+        width: 13%;
+        position: absolute;
+        top: 70px;
+        left: 45px;
+        border-bottom: 4px solid yellow;
+    }
+}

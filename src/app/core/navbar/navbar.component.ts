@@ -43,6 +43,6 @@ export class NavbarComponent {
         this.Clicked.emit(this.btnClicked);
       }
       
-     
     }
 }
+ 

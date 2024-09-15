@@ -1,6 +1,5 @@
 mat-drawer-content{
-    height: 100vh;
-    overflow: hidden;
+    height: 100% !important;
 }
 mat-drawer{
     height: 50vh;
