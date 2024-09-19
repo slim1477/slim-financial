@@ -2,6 +2,7 @@
 .links-section{
     background-color: #006AC3;
     padding-top: 4rem;
+    padding-bottom: 4rem;
 }
 /* ul.list {
     line-height: 25px;
@@ -21,17 +22,19 @@ li > mat-icon{
  li{
     color:#eee;
     font-weight:lighter;
+    padding: 7px;
  }
  button{
     background-color: purple;
     padding: 10px;
     margin-top: 10px;
+    border: 2.5px solid #eee;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
     color: white;
  }
  .footer{
-    padding: 3rem !important;
+    padding: 1rem !important;
     text-align: center;
  }
  .footer p{
