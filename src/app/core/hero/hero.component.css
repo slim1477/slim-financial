@@ -1,3 +1,39 @@
 .hero-section{
     background: linear-gradient(90deg, #FFFFFF 53.61%, #E1EBEF 100%);
 }
+.container{
+    height: fit-content;
+}
+ h2{
+    color: #009CDC;
+    font-family:Georgia, 'Times New Roman', Times, serif ;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 70px;
+ }
+ h3{
+    font-family:Georgia, 'Times New Roman', Times, serif ;
+    font-size: 3rem;
+    line-height: 10%;
+ }
+ .btn-1{
+    border-radius: 5%;
+    height: fit-content;
+ }
+ .btn-2{
+    border: 1px solid #000;
+    border-radius: 0%;
+    width: 13rem;
+    padding: 1.8rem;
+ }
+ @media screen and (max-width:768px) {
+    h2{
+        font-size: 30px;
+        line-height: 3rem;
+    }
+    h3{
+        font-size: 2rem;
+        line-height: .5rem;
+    }
+ }

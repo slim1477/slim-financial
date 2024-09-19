@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { MaterialModule } from '../common/material/material.module';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [],
+  imports: [MaterialModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.css'
 })

@@ -4,9 +4,13 @@
 mat-card{
     border: 1px solid #c2bdbd;
     border-radius: 0%;
+    height:auto;
+}
+.services > mat-card{
+    min-height: 36rem !important;
 }
 mat-list-item,mat-card-title,mat-card-content > p{
-  margin-bottom: 1.5em;
+  margin-bottom: 25px;
 }
 #investments{
     background-image: url("../../../../public/investments.png");
@@ -89,7 +93,7 @@ label:first-of-type::after{
     border-bottom: 4px solid yellow;
 }
 input:first-of-type{
-    width: 73%;
+    width: 71%;
 }
 input:first-of-type::placeholder{
     font-size: large;
