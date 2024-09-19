@@ -1,13 +1,17 @@
 .section{
     background-color: #deecfa;
 }
+img{
+    height: 30rem;
+}
 mat-card{
     border: 1px solid #c2bdbd;
     border-radius: 0%;
     height:auto;
 }
 .services > mat-card{
-    min-height: 36rem !important;
+    max-height: 36rem !important;
+
 }
 mat-list-item,mat-card-title,mat-card-content > p{
   margin-bottom: 25px;

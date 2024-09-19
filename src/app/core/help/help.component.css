@@ -1,0 +1,13 @@
+
+ .help-topics p{
+    color: #006AC3 !important;
+ }
+.help-options  img{
+    width: 3rem !important;
+    float: left;
+}
+.help-options p{
+    margin-left: 70px;
+    margin-top: 10px;
+    color: #006AC3;
+}
