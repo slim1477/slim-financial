@@ -20,10 +20,12 @@
              Slim Financial
             </a>
            @if (isHandset$ | async) {
+            <a role="button" >
            <button mat-flat-button class="has-background-warning  has-text-black p-5 mt-1">
              <mat-icon class="has-text-black">lock</mat-icon>
              <span>sign in</span>
            </button>
+          </a>
            <a role="button" >
             
                <button
@@ -48,7 +50,7 @@
              Contact Us
            </p>
            <p class="mat-body-large pt-3 mt-2 has-text-white mr-6">EN</p>
-           <button mat-flat-button class="has-background-warning mt-3">sign in</button>
+           <button (click)="gotoLogin()" mat-flat-button class="has-background-warning mt-3">sign in</button>
          </div>
        </nav>
      </div>
@@ -58,9 +60,10 @@
        <div class="navbar-menu ">
          <div class="navbar-end  pt-5">
            <ng-template [ngTemplateOutlet]="navlinks"></ng-template>
-           <a mat-button class="navbar-item mat-title-medium has-text-link mx-auto"> <mat-icon>more_vert</mat-icon></a>
+           <a  mat-button class="navbar-item mat-title-medium has-text-link mx-auto"> <mat-icon>more_vert</mat-icon></a>
          </div>
      </div>
      </div>
    </mat-toolbar>
 
+   

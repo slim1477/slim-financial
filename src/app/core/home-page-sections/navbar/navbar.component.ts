@@ -3,9 +3,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { MaterialModule } from '../common/material/material.module';
-import { HeroComponent } from '../hero/hero.component';
-import { RouterOutlet } from '@angular/router';
+import { MaterialModule } from '../../common/material/material.module';
+import { HeroComponent } from '../../home-page-sections/hero/hero.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +21,8 @@ import { RouterOutlet } from '@angular/router';
   ]
 })
 export class NavbarComponent {
+
+  constructor(private router: Router){}
   private breakpointObserver = inject(BreakpointObserver);
   
   @Input()
@@ -43,6 +45,10 @@ export class NavbarComponent {
         this.Clicked.emit(this.btnClicked);
       }
       
+    }
+    gotoLogin(){
+      this.router.navigate(["login"])
+      // console.log("I was clicked")
     }
 }
  

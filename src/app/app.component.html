@@ -1,31 +1,3 @@
 
-<app-navbar
-(Clicked) = "handleIsOpen($event)"
-></app-navbar>
-<mat-drawer-container class="sidenav">
-  <mat-drawer mode="over" position="end" opened="{{isOpen}}">
-    <mat-nav-list class="is-flex is-flex-direction-column " >
-      <mat-list-item class="mat-title-medium has-text-link ">Accounts</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class=" mat-title-medium has-text-link ">Credit Cards</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class=" mat-title-medium has-text-link ">Mortgages</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class=" mat-title-medium has-text-link ">Loans</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class=" mat-title-medium has-text-link ">Investments</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class=" mat-title-medium has-text-link ">Rewards</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="mat-title-medium has-text-link ">Advise</mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
-    <app-hero></app-hero>
-    <app-products></app-products>
-    <app-help></app-help>
-    <app-locator></app-locator>
-    <app-links></app-links>
-  </mat-drawer-content>
-</mat-drawer-container>
+
+<router-outlet></router-outlet>

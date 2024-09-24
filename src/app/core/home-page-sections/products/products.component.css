@@ -17,35 +17,35 @@ mat-list-item,mat-card-title,mat-card-content > p{
   margin-bottom: 25px;
 }
 #investments{
-    background-image: url("../../../../public/investments.png");
+    background-image: url("../../../../../public/investments.png");
     background-repeat: no-repeat;
 }
 #accounts{
-    background-image: url("../../../../public/account.png");
+    background-image: url("../../../../../public/account.png");
     background-repeat: no-repeat;
 }
 #loans{
-    background-image: url("../../../../public/loans.png");
+    background-image: url("../../../../../public/loans.png");
     background-repeat: no-repeat;
     background-size: 3em;
 }
 #mortgages{
-    background-image: url("../../../../public/mortgages.png");
+    background-image: url("../../../../../public/mortgages.png");
     background-repeat: no-repeat;
     background-size: 2em;
 }
 #credit-cards{
-    background-image: url("../../../../public/credit-cards.png");
+    background-image: url("../../../../../public/credit-cards.png");
     background-repeat: no-repeat;
     background-size: 3em;
 }
 #information{
-    background-image: url("../../../../public/information.png");
+    background-image: url("../../../../../public/information.png");
     background-repeat: no-repeat;
     background-size: 2.5em;
 }
 #mouse{
-    background-image: url("../../../../public/mouse.png");
+    background-image: url("../../../../../public/mouse.png");
     background-repeat: no-repeat;
     background-size: 1.9em;
 }

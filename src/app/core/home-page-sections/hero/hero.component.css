@@ -1,6 +1,8 @@
 .hero-section{
-    background: linear-gradient(90deg, #FFFFFF 53.61%, #E1EBEF 100%);
-    background-image: url("../../../../public/hero-bck.png");
+   background: linear-gradient(90deg, #FFFFFF 53.61%, #E1EBEF 100%);
+}
+.hero-body{
+    background-image: url("../../../../../public/hero-bck.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
