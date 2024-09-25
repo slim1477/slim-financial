@@ -1,9 +1,37 @@
 <div class="columns m-0">
-    <div class="column left-column ">
+    <div class="column left-column p-0">
+        <div class="cred-container" [style.top]="top">
+            <mat-card appearance="outlined">
+                <mat-card-content>Simple card</mat-card-content>
+              </mat-card >
+              <button mat-mini-fab 
+              
+              (click)="showCreds()" 
+              class="has-background-warning has-text-white">
+                <mat-icon>menu</mat-icon>
+              </button>
+        </div>
+        <div class="content">
+            <p class="mat-title-large has-text-white">Secure Sign-In</p>
+            <p class="mat-title-small has-text-warning">Slim Financial Online Banking</p>
+        </div>
+     
     </div>
     <div class="column right-column">
-        <div class="container">
-            <input type="text" placeholder="hello">
+        <div class="form-container">
+            <form action="" class="login-form">
+                <label for="" class="mat-title-medium p-0">Debit Card or Username</label>
+                <span>
+                    <mat-icon>lock</mat-icon>
+                </span>
+                <br>
+                <input type="text">
+                <input type="checkbox">
+                <label for="" class="mat-title-medium mr-5">Save Debit Card or Username</label>
+                <mat-icon class="has-text-link">help_outline</mat-icon>
+                <button mat-flat-button >Next</button>
+                
+            </form>
         </div>
     </div>
 </div>
