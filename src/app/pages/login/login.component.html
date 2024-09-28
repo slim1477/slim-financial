@@ -1,7 +1,7 @@
 <div class="columns m-0">
     <div class="column left-column p-0">
-        <div class="cred-container" [style.top]="top">
-            <mat-card appearance="outlined">
+        <div class="cred-container" [@showCreds]="isShowCred() ? 'true' : 'false'">
+            <mat-card appearance="outlined"   >
                 <mat-card-content>Simple card</mat-card-content>
               </mat-card >
               <button mat-mini-fab 
@@ -15,23 +15,64 @@
             <p class="mat-title-large has-text-white">Secure Sign-In</p>
             <p class="mat-title-small has-text-warning">Slim Financial Online Banking</p>
         </div>
-     
     </div>
     <div class="column right-column">
-        <div class="form-container">
-            <form action="" class="login-form">
-                <label for="" class="mat-title-medium p-0">Debit Card or Username</label>
-                <span>
-                    <mat-icon>lock</mat-icon>
-                </span>
-                <br>
-                <input type="text">
-                <input type="checkbox">
-                <label for="" class="mat-title-medium mr-5">Save Debit Card or Username</label>
-                <mat-icon class="has-text-link">help_outline</mat-icon>
-                <button mat-flat-button >Next</button>
-                
-            </form>
+        <div class="wrapper ">
+            
+            <div class="form-container un-input" [@next]="isCardOne() ? 'true' : 'false'" > 
+                <form action="" class="login-form">
+                    <label for="" class="mat-title-medium p-0">Debit Card or Username</label>
+                    <span>
+                        <mat-icon>lock</mat-icon>
+                    </span>
+                    <br>
+                    <input type="text" [(ngModel)]="username" name="username">
+                    <input type="checkbox">
+                        <span for="" class="mat-title-medium clearfix">Save Debit Card or Username
+                            <mat-icon class="has-text-link">help_outline</mat-icon>
+                        </span>
+                    <button mat-flat-button  (click)="slideForm()" >Next</button>
+                    
+                </form>
+                <div class="my-5 pb-5 has-text-link">
+                    <p>Recover Your Username</p>
+                    <p>Enrol in Online Banking</p>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+            
+                <div class="form-container pw-input" [@show]="isCardTwo() ? 'true' : 'false'">
+                     <p class="clearfix ">
+                        
+                            <mat-icon (click)="slideForm()" class="is-clickable has-text-link"> arrow_back_ios</mat-icon>
+                       
+                            <span class="clearfix">
+                        Signing in with {{username}}
+                    </span><p>
+                    <form action="" class="login-form" >
+                        <label for="" class="mat-title-medium p-0">Password</label>
+                        <span>
+                            <mat-icon>lock</mat-icon>
+                        </span>
+                        <br>
+                        <input type="text" [(ngModel)]="password" name="password">
+                        <input type="checkbox">
+                         
+                        <button mat-flat-button >Sign In</button>
+                        
+                    </form>
+                    <div class="my-5 pb-5 has-text-link">
+                        <p>Recover Your Username</p>
+                        <p>Enrol in Online Banking</p>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            
+            
+            
         </div>
+       
+        
+        
     </div>
 </div>

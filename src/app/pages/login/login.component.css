@@ -1,62 +1,52 @@
-
+.columns{
+    position: relative;
+}
 .left-column{
-    height: 100%;
-    width: 70vw;
+    height: 100vh;
+    width: 60vw;
     background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../../../public/mountain.jpg");
     background-position: 2%;
     background-size:cover;
     background-repeat: no-repeat;
     text-align: center;
-    /* align-content: center; */
     position: absolute;
     animation-name: left-slide;
     animation-duration: 5s;
 }
-.content{
-    margin-top: 35%;
-    width: 80%;
-}
+
 .content > p:first-of-type{
     line-height: 1px;
 }
-.cred-container{
-    border-radius: 0%;
-    margin: 0  15px;
-    position: absolute;
-    width: 80%;
+.cred-container > mat-card{
+    border-radius: 0 0 10px 10px !important;
+    margin: 0  35px;
+    align-content: center;
 }
 
-/* Revist credentials card animation effect */
-/* .cred-container:before{
-    animation-name: show-creds;
-    animation-duration: 5s;
-   
-} */
 mat-card{
     padding: 20%;
 }
-.cred-container > button{
+.cred-container > button:first-of-type{
     border-radius: 0 0 10px 10px;
     width: 20%;
-   
+    
 }
 
 .right-column{
+    align-content: center;
     background-color: white;
-    height: 100%;
+    height: 100vh;
     right: 0;
     position: absolute;
-    width: 50vw;
+    width: 40vw !important;
     padding-inline: 8%;
     animation-name: right-slide;
     animation-duration: 5s;
 }
-.form-container{
-    margin-top: 3rem;
-    color: black;
-}
 span{
+    color: black;
     float: inline-end;
+    font-weight: 200 !important;
 }
 input[type=text]{
     margin-top: 8px !important;
@@ -65,9 +55,12 @@ input[type=text]{
 }
 input[type=checkbox]{
     margin-top: 1rem;
-    margin-right: 1rem;
    height: 2rem;
    width: 2rem;
+}
+.clearfix{
+    float: none !important;
+    margin-left: 10px;
 }
 
 form > label{
@@ -84,6 +77,18 @@ form > button{
     width: 100%; 
 
 }
+.wrapper {
+    position: relative ;
+    display: flex;
+    overflow: hidden;
+  }
+.un-input {
+    flex: 1 0 100% ;
+  }
+  .pw-input {
+    flex: 1 0 100% ;
+  }
+
 @keyframes right-slide{
     from {
         right: -40vw;
@@ -97,30 +102,34 @@ form > button{
         width:100vw;
       }
        to {
-        width:70vw;
+        width:60vw;
       }
-}
-@keyframes show-creds{
-    from{
-        top: -54.5%;
-    }
-    to{
-        top:0%
-    }
 }
 
 @media screen and (max-width:768px) {
+    .columns{
+        position: unset;
+        
+    }
+   
     .right-column,.left-column{
         position: unset;
-        width: unset;
+        width: 100vw !important;
         animation: none;
+        overflow: hidden;
     }
     .left-column{
+        align-content: center;
         background-size: cover;
+        margin: auto;
         height: 20vh;
+        
     }
-    .content{
-        padding: 20%;
+    .right-column{
+        height: 80vh;
+        align-content: normal;
+        padding-top: 20%;
+       
     }
     
 }
