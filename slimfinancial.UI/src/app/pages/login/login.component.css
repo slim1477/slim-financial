@@ -49,6 +49,7 @@ span{
     font-weight: 200 !important;
 }
 input[type=text]{
+    border: 1px solid;
     margin-top: 8px !important;
     width: 100%;
     padding: .7rem;
