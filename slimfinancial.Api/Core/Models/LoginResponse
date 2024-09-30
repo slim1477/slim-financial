@@ -1,8 +1,0 @@
-namespace Slimfinancial.Api.Models;
-
-//Represents a Login Response
-public class LoginResponse{
-    public string SessionToken {get;set;} = string.Empty
-    public RequestStatus RequestStatus {get;set;}
-    public string Message {get; set;} = string.Empty;
-}
