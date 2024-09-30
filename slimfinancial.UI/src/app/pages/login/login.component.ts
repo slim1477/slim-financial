@@ -31,22 +31,23 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class LoginComponent{
 
-  isShowCred = signal(false); // controls the demo credentials card animation
+isShowCred = signal(false); // controls the demo credentials card animation
  isCardOne = signal(true) // controls the username input field animation
  isCardTwo = computed(()=>!this.isCardOne()) // controls the password input field animation
 
 //  user credentials
- username: string = 'slim147';
+ username: string = '';
  password: string = '';
 
  // toggles credential card visibility
   showCreds(){
   this.isShowCred.set(!this.isShowCred())
   }
+
+ 
 // controls the sign on form animation
   slideForm() {
-   this.isCardOne.set(!this.isCardOne());
-   console.log(this.username)
+    this.isCardOne.set(!this.isCardOne()) ;
   }
 
 }
