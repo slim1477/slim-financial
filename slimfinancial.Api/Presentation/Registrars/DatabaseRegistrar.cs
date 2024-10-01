@@ -1,4 +1,6 @@
-﻿using SlimFinancial.Api.Registrars.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using SlimFinancial.Api.Registrars.Common;
+using SlimFinancial.Infrastructure.Data;
 
 namespace SlimFinancial.Api.Registrars
 {
@@ -7,7 +9,10 @@ namespace SlimFinancial.Api.Registrars
         public void RegisterServices(WebApplicationBuilder builder)
         {
             //TODO: add dbContext
-            Console.WriteLine("Work in progress");
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString(name: "DefaultConnection"));
+            });
         }
     }
 }

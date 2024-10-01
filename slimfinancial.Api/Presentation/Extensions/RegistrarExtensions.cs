@@ -20,6 +20,7 @@ public static class RegistrarExtensions
         foreach (var registrar in registrars)
         {
             registrar.RegisterServices(builder);
+            Console.WriteLine(registrar);
         }
     }
 
@@ -30,6 +31,7 @@ public static class RegistrarExtensions
         foreach (var registrar in registrars)
         {
             registrar.RegisterPipelineComponents(app);
+            Console.WriteLine(registrar);
         }
     }
 

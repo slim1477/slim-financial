@@ -15,7 +15,7 @@ namespace SlimFinancial.Api.Registrars
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.MapControllers();
         }
