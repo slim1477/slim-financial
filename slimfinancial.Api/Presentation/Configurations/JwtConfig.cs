@@ -1,0 +1,4 @@
+﻿namespace SlimFinancial.Api.Configurations
+{
+    
+}
