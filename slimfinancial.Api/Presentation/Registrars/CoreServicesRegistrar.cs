@@ -1,7 +1,9 @@
-﻿using SlimFinancial.Api.Registrars.Common;
+﻿
+using SlimFinancial.Api.Registrars.Common;
 
-namespace SlimFinancial.Api.Registrars
-{
+
+namespace SlimFinancial.Api.Registrars;
+
     public class CoreServicesRegistrar : IWebApplicationBuilderRegistrar
     {
         public void RegisterServices(WebApplicationBuilder builder)
@@ -12,6 +14,7 @@ namespace SlimFinancial.Api.Registrars
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+           
         }
     }
-}
+

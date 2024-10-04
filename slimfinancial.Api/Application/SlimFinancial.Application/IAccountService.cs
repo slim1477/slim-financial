@@ -12,5 +12,5 @@ namespace SlimFinancial.Application;
 
         Account GetAccountByAcctNumber(string accountNumber);
 
-        Transaction GetTransactionByAcctNumber(string AccountNumber);
+        IEnumerable<Transaction> GetTransactionsByAcctNumber(string AccountNumber);
     }

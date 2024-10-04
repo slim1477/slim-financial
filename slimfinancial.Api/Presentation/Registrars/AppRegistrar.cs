@@ -1,7 +1,7 @@
 ﻿using SlimFinancial.Api.Registrars.Common;
 
-namespace SlimFinancial.Api.Registrars
-{
+namespace SlimFinancial.Api.Registrars;
+
     public class AppRegistrar : IWebApplicationRegistrar
     {
         public void RegisterPipelineComponents(WebApplication app)
@@ -14,10 +14,9 @@ namespace SlimFinancial.Api.Registrars
             }
 
             app.UseHttpsRedirection();
-
-            //app.UseAuthorization();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
         }
     }
-}
+

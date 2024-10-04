@@ -7,5 +7,5 @@ namespace SlimFinancial.Domain.Models.Entity;
     {
     public string SessionToken { get; set; } = string.Empty;
     public bool Status { get; set; }
-    public List<string>? Message { get; set; } 
+    public string Message { get; set; } = string.Empty;
     }
