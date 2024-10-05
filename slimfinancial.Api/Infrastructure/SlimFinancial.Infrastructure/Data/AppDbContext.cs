@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Infrastructure.Data.Configurations;
 
 
 
@@ -13,14 +14,16 @@ namespace SlimFinancial.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new PersonDbConfig());
+            builder.ApplyConfiguration(new TransactionDbConfig());
+            builder.ApplyConfiguration(new AccountDbConfig());
+            builder.ApplyConfiguration(new DebitCardDbConfig());
             
-
-
         }
 
-        private DbSet<Person> Persons { get; set; }
-        private DbSet<Transaction> Transactions { get; set; }
-        private DbSet<Account> Accounts { get; set; }
-        private DbSet<DebitCard> DebitCards { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<DebitCard> DebitCards { get; set; }
     }
 }

@@ -13,6 +13,7 @@ public class Account{
 
     public double Balance {get; set;}
 
-    public List<Person> JointOwners { get; } = [];
+    public List<Person> JointOwners { get; set; } = [];
+    public List<Transaction> Transactions { get; set; } = [];
 
 }
