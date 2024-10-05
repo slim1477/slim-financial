@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SlimFinancial.Application;
+using SlimFinancial.Application.IService;
 using SlimFinancial.Domain.Dtos;
 
 namespace SlimFinancial.Api.Controllers;
@@ -11,11 +11,30 @@ public class AuthController(IAuthService authService) : ControllerBase
 
     [HttpPost]
     [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDto req)
+        public  async Task<IActionResult> Login([FromBody] LoginRequestDto req)
         {
+        
         if (ModelState.IsValid) 
-        { 
-            
+        {
+            var res = await authService.Login(req);
+            LoginResponseDto response = new()
+            {
+                SessionToken = res.SessionToken,
+                Status = res.Status,
+                Message = [res.Message]
+            };
+            switch (res.Message)
+            {
+                case "not found":
+                    return NotFound(res);
+                case "not authorized":
+                    return Unauthorized(res);
+                case "success":
+                    return Ok(res);
+                default:
+                    return BadRequest(res);
+            }
+
         }
         return BadRequest("Invalid request");
         }
@@ -23,18 +42,23 @@ public class AuthController(IAuthService authService) : ControllerBase
 
     [HttpPost]
     [Route("Register")]
-    public async Task<IActionResult> Register([FromBody] LoginRequestDto req)
+    public async Task<IActionResult> Register([FromBody] RegisterRequestDto req)
     {
         if (ModelState.IsValid)
         {
             var res = await authService.Register(req);
-            LoginResponseDto response = new()
+            switch (res.Message)
             {
-                SessionToken = res.SessionToken,
-                Status = res.Status,
-                Message = [res.Message]
-            };
-            return Ok(response);
+                case "not found":
+                    return NotFound(res);
+                case "not authorized":
+                    return Unauthorized(res);
+                case "success":
+                    return Ok(res);
+                default:
+                    return BadRequest(res);
+            }
+            
         }
         return BadRequest("Invalid request");
     }

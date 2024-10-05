@@ -5,7 +5,7 @@ namespace SlimFinancial.Domain.Models.Entity;
 //Represents an Account
 public class Account{
     public string Id {get; set;} = string.Empty;
-    public string OwnerId { get; set;} = string.Empty;
+    public required string OwnerId { get; set;} 
 
     public string AccountNumber {get; set;} = string.Empty;
 

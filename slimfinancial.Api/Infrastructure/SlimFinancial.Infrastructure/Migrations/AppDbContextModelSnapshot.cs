@@ -210,30 +210,18 @@ namespace SlimFinancial.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("OwnerIdId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Pan")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PersonId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerIdId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("DebitCards");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "8c9d79fc-87d3-48b3-af14-3f0df2cfd149",
-                            Pan = "554499"
-                        },
-                        new
-                        {
-                            Id = "9fecd945-69c7-435c-8e99-5219b143d5fc",
-                            Pan = "99664488"
-                        });
                 });
 
             modelBuilder.Entity("SlimFinancial.Domain.Models.Entity.Person", b =>
@@ -320,17 +308,18 @@ namespace SlimFinancial.Infrastructure.Migrations
                             Id = "337f5059-c404-4d22-8128-f8297258856f",
                             AccessFailedCount = 0,
                             Address = "123 test street",
-                            ConcurrencyStamp = "7c6880af-9089-40f5-9483-2faebb7d59a7",
+                            ConcurrencyStamp = "84b5aad2-caca-4871-84df-7aae423fd91d",
                             DateOfBirth = new DateOnly(1947, 12, 17),
                             Email = "jsmith@example.com",
                             EmailConfirmed = false,
                             Fname = "John",
                             Lname = "Smith",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOiXg5iWafEbDWOFX9cAZTrgVsCbXgHhbPDi6k5Q33SEq3+66WM9Hxpd7OtCAVUXfA==",
+                            NormalizedEmail = "JSMITH@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPUX/bk+LY0LdSMJX1xg8UHs8ObyQtAqzP/UmXNI8N9vaZwc5uY82KOwaMVMgHjmsw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3aae8776-7821-4560-b699-c525f1f9b371",
+                            SecurityStamp = "e8ae6862-90d5-4eb9-a481-b92d36665f06",
                             TwoFactorEnabled = false,
                             UserName = "jsmith"
                         },
@@ -339,18 +328,20 @@ namespace SlimFinancial.Infrastructure.Migrations
                             Id = "bb7bc11e-4de9-44a5-b770-d4be2e20bc29",
                             AccessFailedCount = 0,
                             Address = "234 Admirality way",
-                            ConcurrencyStamp = "a1756f93-9221-4e84-b68a-8284e31762bd",
+                            ConcurrencyStamp = "13c0d4d6-1307-4bdc-b029-729be8159692",
                             DateOfBirth = new DateOnly(1985, 5, 15),
                             Email = "lmaxwell@demo.com",
                             EmailConfirmed = false,
                             Fname = "Laura",
                             Lname = "Maxwell",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEG5GpLDPhx1MFYR2DMBzBmZMJuLeayliKXG6TXiSZKzenIMWZVhqiJ9Xu8Zu7YW5vA==",
+                            NormalizedEmail = "LMAXWELL@DEMO.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBGf/XZhGo0cWklP83O+F7fr48suve+PKW9d6VpfL4KMmqhumdNhMx+8+QTClP+wGg==",
                             PhoneNumber = "2356998523",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70ead929-edf2-4037-8213-8530dd04d3af",
-                            TwoFactorEnabled = false
+                            SecurityStamp = "a8314d01-a0ad-406f-9184-c88d6e12a8ce",
+                            TwoFactorEnabled = false,
+                            UserName = "lmaxwell"
                         });
                 });
 
@@ -463,30 +454,15 @@ namespace SlimFinancial.Infrastructure.Migrations
                     b.HasOne("SlimFinancial.Domain.Models.Entity.DebitCard", null)
                         .WithMany("LinkedAccounts")
                         .HasForeignKey("DebitCardId");
-
-                    b.HasOne("SlimFinancial.Domain.Models.Entity.Person", null)
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SlimFinancial.Domain.Models.Entity.DebitCard", b =>
                 {
-                    b.HasOne("SlimFinancial.Domain.Models.Entity.Person", "OwnerId")
+                    b.HasOne("SlimFinancial.Domain.Models.Entity.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("OwnerIdId");
+                        .HasForeignKey("PersonId");
 
-                    b.Navigation("OwnerId");
-                });
-
-            modelBuilder.Entity("SlimFinancial.Domain.Models.Entity.Transaction", b =>
-                {
-                    b.HasOne("SlimFinancial.Domain.Models.Entity.Account", null)
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("SlimFinancial.Domain.Models.Entity.DebitCard", b =>

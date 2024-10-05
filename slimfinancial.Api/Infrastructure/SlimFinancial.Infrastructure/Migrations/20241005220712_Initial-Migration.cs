@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SlimFinancial.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,6 +54,21 @@ namespace SlimFinancial.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Descrition = table.Column<string>(type: "TEXT", nullable: false),
+                    Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    TransactionType = table.Column<int>(type: "INTEGER", nullable: false),
+                    Amount = table.Column<double>(type: "REAL", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,15 +182,15 @@ namespace SlimFinancial.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    OwnerIdId = table.Column<string>(type: "TEXT", nullable: true),
+                    PersonId = table.Column<string>(type: "TEXT", nullable: true),
                     Pan = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DebitCards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DebitCards_AspNetUsers_OwnerIdId",
-                        column: x => x.OwnerIdId,
+                        name: "FK_DebitCards_AspNetUsers_PersonId",
+                        column: x => x.PersonId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -194,12 +209,6 @@ namespace SlimFinancial.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Accounts_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Accounts_DebitCards_DebitCardId",
                         column: x => x.DebitCardId,
@@ -227,27 +236,6 @@ namespace SlimFinancial.Infrastructure.Migrations
                         name: "FK_AccountPerson_AspNetUsers_PersonId",
                         column: x => x.PersonId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Transactions",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Descrition = table.Column<string>(type: "TEXT", nullable: false),
-                    Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    TransactionType = table.Column<int>(type: "INTEGER", nullable: false),
-                    Amount = table.Column<double>(type: "REAL", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transactions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Transactions_Accounts_Id",
-                        column: x => x.Id,
-                        principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -281,17 +269,8 @@ namespace SlimFinancial.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "Fname", "Lname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "337f5059-c404-4d22-8128-f8297258856f", 0, "123 test street", "7c6880af-9089-40f5-9483-2faebb7d59a7", new DateOnly(1947, 12, 17), "jsmith@example.com", false, "John", "Smith", false, null, null, null, "AQAAAAIAAYagAAAAEOiXg5iWafEbDWOFX9cAZTrgVsCbXgHhbPDi6k5Q33SEq3+66WM9Hxpd7OtCAVUXfA==", "1234567890", false, "3aae8776-7821-4560-b699-c525f1f9b371", false, "jsmith" },
-                    { "bb7bc11e-4de9-44a5-b770-d4be2e20bc29", 0, "234 Admirality way", "a1756f93-9221-4e84-b68a-8284e31762bd", new DateOnly(1985, 5, 15), "lmaxwell@demo.com", false, "Laura", "Maxwell", false, null, null, null, "AQAAAAIAAYagAAAAEG5GpLDPhx1MFYR2DMBzBmZMJuLeayliKXG6TXiSZKzenIMWZVhqiJ9Xu8Zu7YW5vA==", "2356998523", false, "70ead929-edf2-4037-8213-8530dd04d3af", false, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DebitCards",
-                columns: new[] { "Id", "OwnerIdId", "Pan" },
-                values: new object[,]
-                {
-                    { "8c9d79fc-87d3-48b3-af14-3f0df2cfd149", null, "554499" },
-                    { "9fecd945-69c7-435c-8e99-5219b143d5fc", null, "99664488" }
+                    { "337f5059-c404-4d22-8128-f8297258856f", 0, "123 test street", "84b5aad2-caca-4871-84df-7aae423fd91d", new DateOnly(1947, 12, 17), "jsmith@example.com", false, "John", "Smith", false, null, "JSMITH@EXAMPLE.COM", null, "AQAAAAIAAYagAAAAEPUX/bk+LY0LdSMJX1xg8UHs8ObyQtAqzP/UmXNI8N9vaZwc5uY82KOwaMVMgHjmsw==", "1234567890", false, "e8ae6862-90d5-4eb9-a481-b92d36665f06", false, "jsmith" },
+                    { "bb7bc11e-4de9-44a5-b770-d4be2e20bc29", 0, "234 Admirality way", "13c0d4d6-1307-4bdc-b029-729be8159692", new DateOnly(1985, 5, 15), "lmaxwell@demo.com", false, "Laura", "Maxwell", false, null, "LMAXWELL@DEMO.COM", null, "AQAAAAIAAYagAAAAEBGf/XZhGo0cWklP83O+F7fr48suve+PKW9d6VpfL4KMmqhumdNhMx+8+QTClP+wGg==", "2356998523", false, "a8314d01-a0ad-406f-9184-c88d6e12a8ce", false, "lmaxwell" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -347,9 +326,9 @@ namespace SlimFinancial.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_DebitCards_OwnerIdId",
+                name: "IX_DebitCards_PersonId",
                 table: "DebitCards",
-                column: "OwnerIdId");
+                column: "PersonId");
         }
 
         /// <inheritdoc />
@@ -377,13 +356,13 @@ namespace SlimFinancial.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Accounts");
+
+            migrationBuilder.DropTable(
                 name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "DebitCards");

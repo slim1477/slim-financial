@@ -7,8 +7,11 @@ using SlimFinancial.Infrastructure.Data.Configurations;
 
 
 
-namespace SlimFinancial.Infrastructure.Data
-{
+namespace SlimFinancial.Infrastructure.Data;
+/// <summary>
+/// Represents the application Database context
+/// </summary>
+/// <param name="options"></param>
     public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<Person>(options)
     {
         protected override void OnModelCreating(ModelBuilder builder)
@@ -26,4 +29,4 @@ namespace SlimFinancial.Infrastructure.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<DebitCard> DebitCards { get; set; }
     }
-}
+
