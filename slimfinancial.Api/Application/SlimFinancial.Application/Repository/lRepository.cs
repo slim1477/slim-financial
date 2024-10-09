@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace SlimFinancial.Application.IRepository;
+namespace SlimFinancial.Application.Repository;
 
 
 /// <summary>
@@ -10,8 +10,8 @@ namespace SlimFinancial.Application.IRepository;
 /// <typeparam name="T"></typeparam>
     public interface IRepository<T>
     {
-     IEnumerable<T> GetAll();
-     T GetById(int id);
+     Task<IEnumerable<T>> GetAll();
+     Task<T> GetByIdAsync(string id);
     void Create(T entity);
     void Update(T entity);
     void Delete(T entity);

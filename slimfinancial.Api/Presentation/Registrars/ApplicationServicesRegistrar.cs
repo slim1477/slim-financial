@@ -13,7 +13,7 @@ public class ApplicationServicesRegistrar : IWebApplicationBuilderRegistrar
     public void RegisterServices(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IAuthService, AuthService>();
-        builder.Services.AddScoped<IService<Account>,AccountService>();
+        builder.Services.AddScoped<AccountService>();
     }
 }
 

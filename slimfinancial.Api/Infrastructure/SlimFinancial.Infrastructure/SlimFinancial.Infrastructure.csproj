@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\Application\SlimFinancial.Application\SlimFinancial.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Repository\Common\" />
+  </ItemGroup>
+
 </Project>

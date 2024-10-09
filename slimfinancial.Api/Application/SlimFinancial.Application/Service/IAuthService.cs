@@ -1,4 +1,4 @@
-using SlimFinancial.Application.IRepository;
+using SlimFinancial.Application.Repository;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models.Entity;
 

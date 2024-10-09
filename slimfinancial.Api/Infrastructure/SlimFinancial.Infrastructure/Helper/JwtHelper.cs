@@ -15,23 +15,27 @@ namespace SlimFinancial.Infrastructure.Helper;
 
     public static string GenerateJwtToken(IdentityUser user, IOptions<JwtConfig> currentValue)
     {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(currentValue.Value.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor()
+        var jwtTokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(currentValue.Value.Secret);
+        if (user != null)
         {
-            Subject = new ClaimsIdentity(
-            [
-                    new Claim("Id",user.Id),
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(
+                [
+                        new Claim("Id",user.Id),
                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                     new Claim(JwtRegisteredClaimNames.Email,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
-                ]),
-            Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
-        };
-        var token = jwtTokenHandler.CreateToken(tokenDescriptor);
-        var jwtToken = jwtTokenHandler.WriteToken(token);
-        return jwtToken;
+                    ]),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            };
+            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+            var jwtToken = jwtTokenHandler.WriteToken(token);
+            return jwtToken;
         }
+        return new InvalidDataException().Message;
+    }
     }
 

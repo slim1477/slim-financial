@@ -97,8 +97,13 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
             };
             var newUser = new Person()
             {
-                
+                Fname = payload.Fname,
+                Lname = payload.Lname,
+                Address = payload.Address,
+                DateOfBirth = DateOnly.Parse(payload.DateOfBirth),
                 Email = payload.Email,
+                PhoneNumber = payload.Phone,
+                UserName = payload.Fname.ToCharArray()[0].ToString() + payload.Lname
             };
             var isCreated = await _userManager.CreateAsync(newUser, payload.Password);
             if (isCreated.Succeeded)
