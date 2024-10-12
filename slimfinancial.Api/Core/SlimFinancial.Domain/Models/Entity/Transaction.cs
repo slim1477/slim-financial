@@ -13,7 +13,7 @@ namespace SlimFinancial.Domain.Models.Entity;
     public TransactionType TransactionType { get; set; }
     public double Amount { get; set; }
 
-    public List<Account> SourceAccount { get; set; } = [];
+    public required Account SourceAccount { get; set; } 
 
     }
 

@@ -10,10 +10,10 @@ namespace SlimFinancial.Application.Repository;
 /// <typeparam name="T"></typeparam>
     public interface IRepository<T>
     {
-     Task<IEnumerable<T>> GetAll();
-     Task<T> GetByIdAsync(string id);
-    void Create(T entity);
-    void Update(T entity);
+    Task<IEnumerable<T>> GetAllAsync();
+    Task<T> GetByIdAsync(string id);
+    Task<int> CreateAsync(T entity);
+    Task<T> UpdateAsync(T entity);
     void Delete(T entity);
 }
 

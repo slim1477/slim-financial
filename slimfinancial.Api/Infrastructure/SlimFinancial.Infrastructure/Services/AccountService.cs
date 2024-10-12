@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SlimFinancial.Application.Repository;
+using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models.Entity;
 using SlimFinancial.Infrastructure.Data;
+using SlimFinancial.Infrastructure.Data.Repository;
 
 namespace SlimFinancial.Infrastructure.Services;
 
 //Represents the services for an account 
-public class AccountService(AppDbContext dbContext, UserManager<Person> userManager) :IRepository<Account>
+public class AccountService(AccountRepo repo, UserManager<Person> userManager)
 {
-    private readonly AppDbContext _dbContext = dbContext;
+    private readonly AccountRepo _repo = repo;
     private readonly UserManager<Person> _userManager = userManager;
 
     /// <summary>
@@ -18,14 +20,12 @@ public class AccountService(AppDbContext dbContext, UserManager<Person> userMana
     /// <param name="entity"></param>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="KeyNotFoundException"></exception>
-    public void Create(Account entity)
+    public async Task<int> OpenAccount(Account entity)
     {
         if(entity == null) throw new ArgumentNullException(nameof(entity));
         var isUserExists =  _userManager.FindByIdAsync(entity.OwnerId);
         if (isUserExists == null) throw new KeyNotFoundException("user does not exsist");
-        var newAccount = _dbContext.Accounts.Add(entity);
-        _dbContext.SaveChanges();
-        
+        return await _repo.CreateAsync(entity);
     }
 
     /// <summary>
@@ -33,11 +33,10 @@ public class AccountService(AppDbContext dbContext, UserManager<Person> userMana
     /// </summary>
     /// <param name="entity"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public void Delete(Account entity)
+    public void CloseAccount(Account entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
-        var isUserExists = _dbContext.Accounts.Remove(entity);
-        _dbContext?.SaveChanges();
+        _repo.Delete(entity);
     }
 
 
@@ -45,9 +44,9 @@ public class AccountService(AppDbContext dbContext, UserManager<Person> userMana
     /// Gets all accounts
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<AccountDto>> GetAll()
+    public async Task<IEnumerable<Account>> GetAllAccounts()
     {
-        return await _dbContext.Accounts.ToListAsync();
+        return await _repo.GetAllAsync();
     }
 
     /// <summary>
@@ -55,9 +54,21 @@ public class AccountService(AppDbContext dbContext, UserManager<Person> userMana
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<Account> GetByIdAsync(string id)
+    public async Task<Account> GetByAccountNumber(string id)
     {
-        return await _dbContext.Accounts.FindAsync(id);
+        return await  _repo.GetByAccountNumberAsync(id);
+        
+    }
+
+    /// <summary>
+    /// Gets account by owner Id
+    /// </summary>
+    /// <param name="ownerId"></param>
+    /// <returns>Accounts that has the specified owner Id</returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<IEnumerable<Account>> GetByOwnerId(string ownerId)
+    {
+        return await _repo.GetByOwnerIdAsync(ownerId);
     }
 
     /// <summary>
@@ -65,11 +76,11 @@ public class AccountService(AppDbContext dbContext, UserManager<Person> userMana
     /// </summary>
     /// <param name="entity"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public void Update(Account entity)
+    public async Task<Account> Update(Account entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
-        _dbContext.Entry(entity).State = EntityState.Modified;
-        
+        var updatedEntity = await  _repo.UpdateAsync(entity);
+        return updatedEntity;
     }
 }
 
