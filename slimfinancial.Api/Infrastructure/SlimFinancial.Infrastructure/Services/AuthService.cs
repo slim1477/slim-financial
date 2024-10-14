@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using SlimFinancial.Application.IService;
 using SlimFinancial.Domain.Dtos;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data;
 using SlimFinancial.Infrastructure.Helper;
 

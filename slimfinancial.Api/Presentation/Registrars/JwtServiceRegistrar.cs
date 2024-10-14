@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SlimFinancial.Api.Registrars.Common;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 using System.Text;
 
 namespace SlimFinancial.Api.Registrars;

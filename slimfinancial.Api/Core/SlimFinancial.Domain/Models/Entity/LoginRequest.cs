@@ -1,4 +1,4 @@
-namespace SlimFinancial.Domain.Models.Entity;
+namespace SlimFinancial.Domain.Models;
 
 // Represents login request
 public class LoginRequest{

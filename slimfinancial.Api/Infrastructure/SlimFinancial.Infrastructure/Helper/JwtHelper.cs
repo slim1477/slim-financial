@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;

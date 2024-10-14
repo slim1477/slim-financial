@@ -5,7 +5,7 @@ using SlimFinancial.Domain.Dtos;
 namespace SlimFinancial.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("Api/[controller]")]
 public class AuthController(IAuthService authService) : ControllerBase
     {
 

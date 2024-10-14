@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 
 
-namespace SlimFinancial.Domain.Models.Entity;
+namespace SlimFinancial.Domain.Models;
 
 // Represents a person
 public class Person : IdentityUser{

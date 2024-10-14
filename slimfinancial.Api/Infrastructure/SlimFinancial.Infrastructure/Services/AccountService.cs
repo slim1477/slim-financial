@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SlimFinancial.Application.Repository;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using SlimFinancial.Domain.Dtos;
-using SlimFinancial.Domain.Models.Entity;
-using SlimFinancial.Infrastructure.Data;
+using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data.Repository;
 
 namespace SlimFinancial.Infrastructure.Services;
 
 //Represents the services for an account 
-public class AccountService(AccountRepo repo, UserManager<Person> userManager)
+public class AccountService(AccountRepo repo, UserManager<Person> userManager,IMapper mapper)
 {
     private readonly AccountRepo _repo = repo;
     private readonly UserManager<Person> _userManager = userManager;
+    private readonly IMapper _mapper = mapper;
 
     /// <summary>
     /// Creates an account
@@ -44,9 +43,10 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager)
     /// Gets all accounts
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<Account>> GetAllAccounts()
+    public async Task<IEnumerable<AccountDto>> GetAllAccounts()
     {
-        return await _repo.GetAllAsync();
+       var accounts =  await _repo.GetAllAsync();
+        return _mapper.Map<IEnumerable<AccountDto>>(accounts);
     }
 
     /// <summary>
@@ -54,9 +54,10 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager)
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<Account> GetByAccountNumber(string id)
+    public async Task<AccountDto> GetByAccountNumber(string id)
     {
-        return await  _repo.GetByAccountNumberAsync(id);
+        var  account = await _repo.GetByAccountNumberAsync(id);
+        return _mapper.Map<AccountDto>(account);
         
     }
 
@@ -66,9 +67,10 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager)
     /// <param name="ownerId"></param>
     /// <returns>Accounts that has the specified owner Id</returns>
     /// <exception cref="NotImplementedException"></exception>
-    public async Task<IEnumerable<Account>> GetByOwnerId(string ownerId)
+    public async Task<IEnumerable<AccountDto>> GetByOwnerId(string ownerId)
     {
-        return await _repo.GetByOwnerIdAsync(ownerId);
+        var accounts = await _repo.GetByOwnerIdAsync(ownerId);
+        return _mapper.Map<IEnumerable<AccountDto>>(accounts);
     }
 
     /// <summary>
@@ -76,11 +78,11 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager)
     /// </summary>
     /// <param name="entity"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public async Task<Account> Update(Account entity)
+    public async Task<AccountDto> Update(Account entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
         var updatedEntity = await  _repo.UpdateAsync(entity);
-        return updatedEntity;
+        return _mapper.Map<AccountDto>(updatedEntity);
     }
 }
 

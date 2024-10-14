@@ -1,6 +1,6 @@
 ﻿
 
-namespace SlimFinancial.Domain.Models.Entity;
+namespace SlimFinancial.Domain.Models;
 
     // Represents a login request Response
     public class LoginResponse

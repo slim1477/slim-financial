@@ -1,6 +1,6 @@
 using SlimFinancial.Application.Repository;
 using SlimFinancial.Domain.Dtos;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 
 
 namespace SlimFinancial.Application.IService;

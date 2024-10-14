@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data.Configurations;
 
 

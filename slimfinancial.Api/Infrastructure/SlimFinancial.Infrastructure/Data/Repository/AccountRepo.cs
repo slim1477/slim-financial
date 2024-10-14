@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using SlimFinancial.Application.Repository;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 using System.Linq;
 
 namespace SlimFinancial.Infrastructure.Data.Repository;

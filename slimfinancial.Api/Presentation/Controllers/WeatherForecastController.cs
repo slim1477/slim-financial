@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 
 namespace slimfinancial.Api.Controllers;
 

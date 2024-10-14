@@ -1,6 +1,5 @@
 ﻿using SlimFinancial.Api.Registrars.Common;
 using SlimFinancial.Application.IService;
-using SlimFinancial.Domain.Models.Entity;
 using SlimFinancial.Infrastructure.Services;
 
 namespace SlimFinancial.Api.Registrars;
@@ -14,6 +13,7 @@ public class ApplicationServicesRegistrar : IWebApplicationBuilderRegistrar
     {
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<AccountService>();
+        builder.Services.AddScoped<TransactionService>();
     }
 }
 

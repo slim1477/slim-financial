@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SlimFinancial.Domain.Models.Entity;
+using SlimFinancial.Domain.Models;
 using System;
 
 namespace SlimFinancial.Infrastructure.Data.Configurations;
