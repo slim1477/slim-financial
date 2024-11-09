@@ -20,7 +20,7 @@ This API is structured following the Onion Architecture, which divides the appli
 * **Infrastructure** : Implements data access, external integrations, and repository patterns, DTOs and implementation of business logic defined in the application layer.
 * **Presentation** : The presentation layer providing the RESTful API endpoints.
 # Key Directories
-* **[/Core/SlimFinancial.Domain](slimfinancial.Api/Core/SlimFinancial.Domain)** : Domain Models
+* **[/Core/SlimFinancial.Domain](./Core/SlimFinancial.Domain)** : Domain Models
 * **[/Application/SlimFinancial.Application](/Application/SlimFinancial.Application)** : Services and Use Cases
 * **[/Infrastructure/SlimFinancial.Infrastructure](/Infrastructure/SlimFinancial.Infrastructure)** : Data access, Implementation and Service intergrations.
 * **[/Presentation/SlimFinancial.API](/Presentation/SlimFinancial.API)** : API Controllers and configurations.
