@@ -1,27 +1,24 @@
-# SlimFinancial
+# Slimfinancial.UI
+This is the frontend the of **Slim Financial** banking application built with Angular. It includes a landing page, login page, and user dashboard. The frontend communicates with a backend API to provide a seamless banking experience for users. Please note this should be run as a separate project from the backend API.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+# Contents
+* Overview
+* Features
+* Project Structure
+* Prerequisites
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Overview
+The frontend application provides a user-friendly interface for the banking application. It presents a public landing page, login screen and a user dashboard that allows users to view information, and interact with their bank account information. The application is modular and will be further extended with additional features in the future.
 
-## Code scaffolding
+# Features
+* Landing Page: Welcomes visitors and provides an overview of the bank's services.
+* Login Page: Authenticates users via login credentials.
+* User Dashboard: Displays account information, recent transactions, and other user-specific details.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Project Structure
+The project follows the statndard Angular project structure. Each feature has been bunduled into separate modules followoing the concept of separation of concern.
+# Prerequisites
+* [Node.js](https://nodejs.org/en/download/package-manager) and [npm](https://www.npmjs.com/package/download)
+* [Angular CLI](https://angular.dev/installation)
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
