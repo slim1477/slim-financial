@@ -23,7 +23,7 @@ This API is structured following the Onion Architecture, which divides the appli
 * **[/Core/SlimFinancial.Domain](./Core/SlimFinancial.Domain)** : Domain Models
 * **[/Application/SlimFinancial.Application](./Application/SlimFinancial.Application)** : Services and Use Cases
 * **[/Infrastructure/SlimFinancial.Infrastructure](./Infrastructure/SlimFinancial.Infrastructure)** : Data access, Implementation and Service intergrations.
-* **[/Presentation/SlimFinancial.API](./Presentation/SlimFinancial.API)** : API Controllers and configurations.
+* **[/Presentation/SlimFinancial.API](./slimfinancial.Api/Presentation)** : API Controllers and configurations.
 
 
 
