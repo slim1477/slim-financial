@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using SlimFinancial.Domain.Dtos;
+using SlimFinancial.Domain.Dtos.ResponseDtos;
 using SlimFinancial.Domain.Models;
 
 namespace SlimFinancial.Infrastructure.Data.Configurations;
@@ -13,7 +14,8 @@ namespace SlimFinancial.Infrastructure.Data.Configurations;
     public AutoMapperConfig() 
     {
         CreateMap<Account,AccountDto>().ReverseMap();
-        CreateMap<Transaction,TransactionGetDto>().ReverseMap();
+        CreateMap<Transaction, TransactionDto>().ReverseMap();
+        CreateMap<Transaction, TransactionReqDto>().ReverseMap();
         CreateMap<Person,PersonDto>().ReverseMap();
     }
     }

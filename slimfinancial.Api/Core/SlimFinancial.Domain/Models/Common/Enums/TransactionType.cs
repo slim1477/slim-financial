@@ -1,6 +1,6 @@
 ﻿
 
-namespace SlimFinancial.Domain.Models.Common.Enums;
+namespace SlimFinancial.Domain.Models.Common;
 
     public enum TransactionType
     {

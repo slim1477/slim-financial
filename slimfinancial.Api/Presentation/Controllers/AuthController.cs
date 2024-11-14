@@ -5,7 +5,7 @@ using SlimFinancial.Domain.Dtos;
 namespace SlimFinancial.Api.Controllers;
 
 [ApiController]
-[Route("Api/[controller]")]
+[Route("api/[controller]")]
 public class AuthController(IAuthService authService) : ControllerBase
     {
 
@@ -17,11 +17,11 @@ public class AuthController(IAuthService authService) : ControllerBase
         if (ModelState.IsValid) 
         {
             var res = await authService.Login(req);
-            LoginResponseDto response = new()
+            var response = new LoginResponseDto
             {
                 SessionToken = res.SessionToken,
-                Status = res.Status,
-                Message = [res.Message]
+                Success = res.Success,
+                Message = res.Message,
             };
             switch (res.Message)
             {
@@ -47,20 +47,22 @@ public class AuthController(IAuthService authService) : ControllerBase
         if (ModelState.IsValid)
         {
             var res = await authService.Register(req);
-            switch (res.Message)
+            return res.Message switch
             {
-                case "not found":
-                    return NotFound(res);
-                case "not authorized":
-                    return Unauthorized(res);
-                case "success":
-                    return Ok(res);
-                default:
-                    return BadRequest(res);
-            }
-            
+                "not found" => NotFound(res),
+                "not authorized" => Unauthorized(res),
+                "success" => Ok(res),
+                _ => BadRequest(res),
+            };
         }
         return BadRequest("Invalid request");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetPersons()
+    {
+        var res = await authService.GetAll();
+        return Ok(res);
     }
 }
 

@@ -4,13 +4,13 @@ import {
   TemplatePortal
 } from "./chunk-EIOPVW2Y.js";
 import {
-  SharedResizeObserver
-} from "./chunk-437RARZI.js";
-import {
   CdkScrollable,
   ViewportRuler
 } from "./chunk-TYN2QE57.js";
 import "./chunk-L344F5KA.js";
+import {
+  SharedResizeObserver
+} from "./chunk-437RARZI.js";
 import {
   animate,
   state,

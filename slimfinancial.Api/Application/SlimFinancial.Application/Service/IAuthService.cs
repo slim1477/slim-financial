@@ -8,7 +8,8 @@ namespace SlimFinancial.Application.IService;
 // represents basic authentication service
 public interface IAuthService
 {
-    Task<LoginResponse> Login(LoginRequestDto req);
-    Task<LoginResponse> Register(RegisterRequestDto req);
+    Task<LoginResponseDto> Login(LoginRequestDto req);
+    Task<RegisterResponseDto> Register(RegisterRequestDto req);
+    Task<IEnumerable<PersonDto>> GetAll();
     void Logout();
 }

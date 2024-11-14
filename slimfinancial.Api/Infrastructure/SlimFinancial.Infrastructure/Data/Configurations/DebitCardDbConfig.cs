@@ -13,8 +13,15 @@ public class DebitCardDbConfig : IEntityTypeConfiguration<DebitCard>
 {
     public void Configure(EntityTypeBuilder<DebitCard> builder)
     {
-        builder.HasKey(x => x.Id);
-       
+        builder.HasKey(x => x.Pan);
+        //builder.Property(x => x.Pan).HasComputedColumnSql("CAST(Pan AS TEXT",stored:true);
+        builder.Property(d => d.Pan)
+               .HasDefaultValue(429448001)
+               .HasAnnotation("Sqlite:Autoincrement",true)
+               .ValueGeneratedOnAdd();
+
+
+
     }
 }
 

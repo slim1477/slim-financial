@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SlimFinancial.Application.IService;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data;
 using SlimFinancial.Infrastructure.Helper;
+using System;
 
 
 namespace SlimFinancial.Infrastructure.Services;
 // Represent authentication services
-public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jwt,AppDbContext dbContext) : IAuthService
+public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jwt,AppDbContext dbContext,IMapper mapper) : IAuthService
 {
     private readonly UserManager<Person>  _userManager = userManager;
     private readonly IOptions<JwtConfig> _jwtConfig = jwt;
     private readonly AppDbContext _dbContext = dbContext;
+    private readonly IMapper _mapper = mapper;
 
 
     /// <summary>
@@ -21,19 +25,19 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     /// </summary>
     /// <param name="req"></param>
     /// <returns>a registered user</returns>
-    private Task<Person?> _GetUsernameType(LoginRequestDto req)
+    private Person? GetUsernameType(LoginRequestDto req)
     {
-        var isPan = Int32.TryParse(req.Username, out int result);
+        var isPan = Int32.TryParse(req.Username,out int result);
 
         if (isPan)
         {
-            var debitCard = _dbContext.DebitCards.Where(x => x.Pan == req.Username).First();
-            var userId = debitCard.PersonId;
-            var userByPan =  _userManager.FindByIdAsync(userId);
+            var debitCard = _dbContext.DebitCards.Where(x => x.Pan == Int32.Parse(req.Username)).First();
+            var userId = debitCard.PersonNumber;
+            var userByPan =  _userManager.FindByIdAsync(userId.ToString()).Result;
             return userByPan;
 
         }
-         var userByUsername = _userManager.FindByNameAsync(req.Username);
+         var userByUsername = _userManager.FindByNameAsync(req.Username).Result;
         return userByUsername;
 
     }
@@ -43,27 +47,27 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     /// </summary>
     /// <param name="req"></param>
     /// <returns>a valid token if user is authenticated</returns>
-    public async Task<LoginResponse> Login(LoginRequestDto req)
+    public async Task<LoginResponseDto> Login(LoginRequestDto req)
     {
-        var userExists = _GetUsernameType(req).Result;
-        if (userExists == null) return new LoginResponse
+        var userExists = GetUsernameType(req);
+        if (userExists == null) return new LoginResponseDto
         {
             SessionToken = "",
-            Status = false,
+            Success = false,
             Message = "not found"
         };
         
         var authUser = await _userManager.CheckPasswordAsync(userExists, req.Password);
-        if (!authUser) return new LoginResponse
+        if (!authUser) return new LoginResponseDto
         {
             SessionToken = "",
-            Status = false,
+            Success = false,
             Message = "not authorized"
         };
-        return new LoginResponse
+        return new LoginResponseDto
         {
-            SessionToken = JwtHelper.GenerateJwtToken(userExists, _jwtConfig),
-            Status = true,
+            SessionToken = AuthenticationHelper.GenerateJwtToken(userExists, _jwtConfig),
+            Success = true,
             Message = "success"
         };
     }
@@ -84,51 +88,47 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     /// </summary>
     /// <param name="payload"></param>
     /// <returns>a registered user</returns>
-    public async Task<LoginResponse> Register(RegisterRequestDto payload)
+    public async Task<RegisterResponseDto> Register(RegisterRequestDto payload)
     {
         var usernameExist = await _userManager.FindByEmailAsync(payload.Email);
+        //var lastPersonNumber = await _dbContext.Persons.Select(x => Int32.Parse(x.PersonNumber)).MaxAsync();
+        //var l = await _dbContext.Persons.LastAsync();
+        
         try
-        {   
-            if (usernameExist != null) return new LoginResponse
-            {
-                SessionToken = string.Empty,
-                Status = false,
-                Message = "Email already exist"
-            };
-            var newUser = new Person()
-            {
-                Fname = payload.Fname,
-                Lname = payload.Lname,
-                Address = payload.Address,
-                DateOfBirth = DateOnly.Parse(payload.DateOfBirth),
-                Email = payload.Email,
-                PhoneNumber = payload.Phone,
-                UserName = payload.Fname.ToCharArray()[0].ToString() + payload.Lname
-            };
-            var isCreated = await _userManager.CreateAsync(newUser, payload.Password);
+        {
+           var newUser = usernameExist != null ? throw new Exception("Email already exist") : new Person{
+                                                                                                        Fname = payload.Fname,
+                                                                                                        Lname = payload.Lname,
+                                                                                                        Address = payload.Address,
+                                                                                                        DateOfBirth = DateOnly.Parse(payload.DateOfBirth),
+                                                                                                        Email = payload.Email,
+                                                                                                        PhoneNumber = payload.PhoneNumber,
+                                                                                                        UserName = payload.Fname.ToCharArray()[0].ToString() + payload.Lname
+                                                                                                        };
+                    var isCreated = await _userManager.CreateAsync(newUser, payload.Password);
             if (isCreated.Succeeded)
             {
-                return new LoginResponse
+                return new RegisterResponseDto
                 {
-                    SessionToken = JwtHelper.GenerateJwtToken(newUser, _jwtConfig),
-                    Status = true,
-                    Message = "Created"
+                    //SessionToken = AuthenticationHelper.GenerateJwtToken(newUser, _jwtConfig),
+                    Success = true,
+                    Message = "Created",
+                    SessionToken = AuthenticationHelper.GenerateJwtToken(newUser,_jwtConfig)
                 };
             }
         }catch (Exception ex)
             {
-                return new LoginResponse
+                return new RegisterResponseDto
                        {
-                           SessionToken = "",
-                           Status = false,
+                           
+                           Success = false,
                            Message = ex.Message
                         };
             }
 
-        return new LoginResponse
+        return new RegisterResponseDto
         {
-            SessionToken = String.Empty,
-            Status = false,
+            Success = false,
             Message = "there was an error, please try again"
         };
     }
@@ -136,6 +136,14 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     public void Update(Person entity)
     {
         throw new NotImplementedException();
+    }
+
+    public  async Task<IEnumerable<PersonDto>> GetAll()
+    {
+        var persons =  await _dbContext.Persons.ToListAsync();
+        return  _mapper.Map<IEnumerable<PersonDto>>(persons);
+        
+
     }
 }
         

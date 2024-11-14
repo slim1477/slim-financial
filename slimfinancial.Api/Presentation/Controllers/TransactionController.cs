@@ -18,17 +18,26 @@ namespace SlimFinancial.Api.Controllers;
         }
 
         [HttpGet]
-    [Route("{acctNum}")]
+        [Route("{acctNum}")]
         public async Task<IActionResult> GetTransactionsByAccountNumberAsync(string acctNum) 
         {
             return Ok(await _service.GetByAccountNumber(acctNum));
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTransaction([FromBody] TransactionCreateDto payload)
+        public async Task<IActionResult> CreateTransaction([FromBody] TransactionReqDto payload)
         {
-        if (payload == null) return BadRequest();
-        return Ok(await _service.CreateTransaction(payload));
+        
+            if (payload == null) return BadRequest();
+            var res = await _service.CreateTransaction(payload);
+
+            switch (res.Status)
+            {
+                case true:
+                    return Ok(res);
+                case false:
+                    return UnprocessableEntity(res);
+            }
         }
     }
 

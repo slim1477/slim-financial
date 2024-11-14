@@ -9,6 +9,7 @@ public class IdentityService : IWebApplicationBuilderRegistrar
 {
     public void RegisterServices(WebApplicationBuilder builder)
     {
+
         builder.Services.AddIdentityCore<Person>(options =>
         {
             options.SignIn.RequireConfirmedAccount = false;

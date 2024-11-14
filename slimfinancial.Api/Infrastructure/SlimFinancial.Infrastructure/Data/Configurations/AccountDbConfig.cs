@@ -2,7 +2,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SlimFinancial.Domain.Models.Common.Enums;
 using SlimFinancial.Domain.Models;
 
 namespace SlimFinancial.Infrastructure.Data.Configurations;
@@ -11,16 +10,14 @@ public class AccountDbConfig : IEntityTypeConfiguration<Account>
 {
     public void Configure(EntityTypeBuilder<Account> builder)
     {
-        builder.HasKey(a => a.Id);
-        //builder.HasMany<Transaction>().WithOne().HasForeignKey(t => t.Id);
-        builder.HasMany(jo => jo.JointOwners)
-                .WithMany(a => a.Accounts)
-                .UsingEntity(
-                        ac =>
-                        {
-                            ac.Property("JointOwnersId").HasColumnName("PersonId");
-                        }
-                            );
+        builder.HasKey(a => a.AccountNumber);
+        //builder.Property(a => a.AccountNumber)
+        //        .HasComputedColumnSql("CAST(AccountNumber AS TEXT)", stored: true);
+        builder.Property(a => a.AccountNumber)
+               .HasDefaultValue(1100100100)
+               .HasAnnotation("Sqlite:Autoincrement", true)
+               .ValueGeneratedOnAdd();
+
         //builder.HasData(
         //new Account
         //{

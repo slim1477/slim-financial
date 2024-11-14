@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using SlimFinancial.Application.Repository;
 using SlimFinancial.Domain.Models;
-using System.Linq;
+using SlimFinancial.Domain.Models.Common;
 
 namespace SlimFinancial.Infrastructure.Data.Repository;
 
@@ -16,22 +16,20 @@ public class AccountRepo(AppDbContext dbContext) : IRepository<Account>
     private readonly AppDbContext _dbContext = dbContext;
     public async Task<int> CreateAsync(Account entity)
     {
-        await _dbContext.Accounts.AddAsync(entity);
-        return _dbContext.SaveChanges();
+         _dbContext.Accounts.Add(entity);
+        return await _dbContext.SaveChangesAsync();
     }
 
-    public void Delete(Account entity)
+    public async Task<int> Close(Account entity)
     {
-        _dbContext.Accounts.Remove(entity);
-        _dbContext?.SaveChanges();
+        entity.Status = AccountStatus.Closed;
+        //_dbContext.Accounts.Update(entity);
+        return await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Account>> GetByOwnerIdAsync(string ownerId)
+    public async Task<IEnumerable<Account>> GetByPersonNumberAsync(string personNumber)
     {
-        return await Task<IEnumerable<Account>>.Run(() =>
-        {
-            return _dbContext.Accounts.Where(x => x.OwnerId == ownerId);
-        });
+        return await _dbContext.Accounts.Where(x => x.PersonNumber == Int32.Parse(personNumber)).ToListAsync();
         
     }
     public async Task<IEnumerable<Account>> GetAllAsync()
@@ -39,20 +37,41 @@ public class AccountRepo(AppDbContext dbContext) : IRepository<Account>
         return await _dbContext.Accounts.ToListAsync();
     }
 
-    public async Task<Account> GetByAccountNumberAsync(string acctNum)
+    public async Task<Account?> GetByAccountNumberAsync(string acctNum)
     {
-        return await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountNumber == acctNum);
+        return await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountNumber == Int32.Parse(acctNum));
     }
 
-    public Task<Account> GetByIdAsync(string id)
+
+    public  void Update(Account entity)
     {
-        throw new NotImplementedException();
+        
+        _dbContext.Accounts.Update(entity);
+        
+        
     }
 
-    public async Task<Account> UpdateAsync(Account entity)
+    public async Task<Account> UpdateBalanceAsync(Account account, double amount,TransactionType type)
     {
-        _dbContext.Entry(entity).State =  EntityState.Modified;
-        return entity;
+
+        switch (type)
+        {
+            case TransactionType.Debit:
+                account.Balance -= amount;
+               break;
+            case TransactionType.Credit:
+                account.Balance += 89988;
+               break ;
+        }
+        var hasChanges = _dbContext.ChangeTracker.HasChanges();
+        //var changed = _dbContext.Update(account);
+        await _dbContext.SaveChangesAsync();
+        return account;
+    }
+
+    public async Task SaveAccountChanges()
+    {
+        await _dbContext.SaveChangesAsync();
     }
 }
 

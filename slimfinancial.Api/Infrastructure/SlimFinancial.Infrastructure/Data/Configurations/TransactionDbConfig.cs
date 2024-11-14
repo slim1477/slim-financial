@@ -1,9 +1,5 @@
-﻿
-
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SlimFinancial.Domain.Models.Common.Enums;
 using SlimFinancial.Domain.Models;
 
 namespace SlimFinancial.Infrastructure.Data.Configurations;

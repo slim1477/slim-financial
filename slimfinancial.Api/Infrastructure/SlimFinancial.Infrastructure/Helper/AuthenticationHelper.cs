@@ -9,11 +9,11 @@ using System.Security.Claims;
 
 namespace SlimFinancial.Infrastructure.Helper;
 
-    public  class JwtHelper
+    public  class AuthenticationHelper
     {
 
 
-    public static string GenerateJwtToken(IdentityUser user, IOptions<JwtConfig> currentValue)
+    public static string GenerateJwtToken(Person user, IOptions<JwtConfig> currentValue)
     {
         var jwtTokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(currentValue.Value.Secret);
@@ -23,9 +23,9 @@ namespace SlimFinancial.Infrastructure.Helper;
             {
                 Subject = new ClaimsIdentity(
                 [
-                        new Claim("Id",user.Id),
-                    new Claim(JwtRegisteredClaimNames.Sub,user.Email),
-                    new Claim(JwtRegisteredClaimNames.Email,user.Email),
+                    new Claim("Person",user.PersonNumber.ToString()),
+                    new Claim(JwtRegisteredClaimNames.NameId,user.PersonNumber.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email,user.Email!),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
                     ]),
                 Expires = DateTime.UtcNow.AddHours(1),

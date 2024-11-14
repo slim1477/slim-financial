@@ -21,7 +21,7 @@ namespace SlimFinancial.Api.Registrars;
 
             }).AddJwtBearer(options =>
                 {
-                    var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
+                    var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value!);
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
