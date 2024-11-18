@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using SlimFinancial.Application.IService;
+using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data;

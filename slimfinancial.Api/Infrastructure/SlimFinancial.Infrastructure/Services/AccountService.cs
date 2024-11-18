@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models;
 using SlimFinancial.Domain.Models.Common;
-using SlimFinancial.Infrastructure.Data;
 using SlimFinancial.Infrastructure.Data.Repository;
 
 namespace SlimFinancial.Infrastructure.Services;
@@ -27,7 +27,7 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager,IM
     {
         try
         {
-            ArgumentNullException.ThrowIfNull(entity);
+            if(entity.PersonNumber.IsNullOrEmpty()) throw new ArgumentNullException("Person Number Cannot be empty");
             var isUserExists = _userManager.FindByIdAsync(entity.PersonNumber);
             var newAcct = isUserExists == null ? throw new KeyNotFoundException("user does not exsist") :
                           new Account
@@ -41,9 +41,9 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager,IM
 
             return new ReqResponseDto { Success = true, Message = "Account Successfully Opened" };
         }
-        catch (Exception ex) 
+        catch (Exception) 
         {
-            return new ReqResponseDto { Success = false, Message = $"{ex.Message}" };
+            throw;
         }
        
     }
@@ -57,15 +57,15 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager,IM
     {
         try
         {
-            
+            if (accountNumber.IsNullOrEmpty()) throw new Exception("account number cannot be null");
             var account = await _repo.GetByAccountNumberAsync(accountNumber) ?? throw new ArgumentNullException($"Account number {accountNumber} not found");
             _ = account.Balance < 0 ? throw new Exception("cannot close account with balance greater than 0") : await _repo.Close(account);
             return new ReqResponseDto { Success = true, Message = $"Account with account number {account.AccountNumber} closed successfully" };
 
         }
-        catch (Exception ex) 
-        { 
-            return new ReqResponseDto { Success = false, Message= ex.Message };
+        catch (Exception) 
+        {
+            throw;
         }
 
     }

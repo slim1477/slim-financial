@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Infrastructure.Services;
 
@@ -9,9 +10,9 @@ namespace SlimFinancial.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-public class AccountController(AccountService service) : ControllerBase
+public class AccountController(IAccountService service) : ControllerBase
 {
-    private readonly AccountService _accountService = service;
+    private readonly IAccountService _accountService = service;
 
 
     [HttpGet]
@@ -39,18 +40,26 @@ public class AccountController(AccountService service) : ControllerBase
         [Route("close")]
         public async Task<IActionResult> CloseAccount([FromBody] string acctNum)
         {
-            if (acctNum == null) return BadRequest("Please provide an account number");
+            
             try
             {
-                var status = await _accountService.CloseAccount(acctNum);
-                return Ok(status);
+                
+                var res = await _accountService.CloseAccount(acctNum);
+                
+                return Ok(res);
             }catch (Exception ex)
             {
-                return UnprocessableEntity(ex.Message);
-            }
-           
+            var res = new ReqResponseDto
+            {
+                Success = false,
+                Message = ex.Message
+            };
+            return UnprocessableEntity(res);
 
         }
+
+
+    }
 
         [HttpPost]
         [Route("update")]
@@ -71,16 +80,22 @@ public class AccountController(AccountService service) : ControllerBase
         }
     [HttpPost]
     [Route("open")]
-    public async Task<IActionResult> OpenAccount([FromBody] AccountOpenReqDto acct)
+    public async Task<IActionResult> OpenAccount([FromBody] AccountOpenReqDto payload)
     {
         try
         {
-            var res = await _accountService.OpenAccount(acct);
+            
+            var res = await _accountService.OpenAccount(payload);
             return Ok(res);
         }
         catch (Exception ex) 
         {
-            return UnprocessableEntity(ex.Message);
+            var res = new ReqResponseDto
+            {
+                Success = false,
+                Message = ex.Message,
+            };
+            return UnprocessableEntity(res);
         }
     }
 

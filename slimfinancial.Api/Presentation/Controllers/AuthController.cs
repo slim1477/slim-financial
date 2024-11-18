@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SlimFinancial.Application.IService;
+using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 
 namespace SlimFinancial.Api.Controllers;

@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
+using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Dtos.ResponseDtos;
 using SlimFinancial.Domain.Models;
@@ -15,11 +16,11 @@ namespace SlimFinancial.Infrastructure.Services;
 /// </summary>
 /// <param name="repo"></param>
 /// <param name="mapper"></param>
-public class TransactionService(TransactionRepo repo,AccountService service,IMapper mapper)
+public class TransactionService(TransactionRepo repo,IAccountService service,IMapper mapper)
 {
     private readonly TransactionRepo _repo = repo;
     private readonly IMapper _mapper = mapper;
-    private readonly AccountService _service = service;
+    private readonly IAccountService _service = service;
 
     /// <summary>
     /// Gets all transaction

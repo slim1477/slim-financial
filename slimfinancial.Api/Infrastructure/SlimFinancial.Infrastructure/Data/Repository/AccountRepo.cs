@@ -23,7 +23,6 @@ public class AccountRepo(AppDbContext dbContext) : IRepository<Account>
     public async Task<int> Close(Account entity)
     {
         entity.Status = AccountStatus.Closed;
-        //_dbContext.Accounts.Update(entity);
         return await _dbContext.SaveChangesAsync();
     }
 

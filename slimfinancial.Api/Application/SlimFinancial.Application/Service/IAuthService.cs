@@ -3,7 +3,7 @@ using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models;
 
 
-namespace SlimFinancial.Application.IService;
+namespace SlimFinancial.Application.Service;
 
 // represents basic authentication service
 public interface IAuthService
