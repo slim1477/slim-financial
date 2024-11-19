@@ -4,7 +4,6 @@ using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
-using SlimFinancial.Domain.Dtos.ResponseDtos;
 using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data.Repository;
 
@@ -16,7 +15,7 @@ namespace SlimFinancial.Infrastructure.Services;
 /// </summary>
 /// <param name="repo"></param>
 /// <param name="mapper"></param>
-public class TransactionService(TransactionRepo repo,IAccountService service,IMapper mapper)
+public class TransactionService(TransactionRepo repo,IAccountService service,IMapper mapper) : ITransactionService
 {
     private readonly TransactionRepo _repo = repo;
     private readonly IMapper _mapper = mapper;
@@ -37,7 +36,7 @@ public class TransactionService(TransactionRepo repo,IAccountService service,IMa
     /// </summary>
     /// <param name="accountNum"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<TransactionDto>> GetByAccountNumber(string accountNum)
+    public async Task<IEnumerable<TransactionDto>> GetTransactionByAccountNumber(string accountNum)
     {
         var transactions = await _repo.GetByAccountNumber(accountNum);
         return _mapper.Map<List<TransactionDto>>(transactions);
@@ -48,7 +47,7 @@ public class TransactionService(TransactionRepo repo,IAccountService service,IMa
     /// </summary>
     /// <param name="trans"></param>
     /// <returns></returns>
-    public async Task<TransactionResDto> CreateTransaction(TransactionReqDto trans)
+    public async Task<TransactionResDto> CreateTransactionAsync(TransactionReqDto trans)
     {
         
         try 

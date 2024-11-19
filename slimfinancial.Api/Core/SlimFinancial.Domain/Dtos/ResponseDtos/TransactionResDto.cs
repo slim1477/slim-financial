@@ -1,6 +1,6 @@
 ﻿
 
-namespace SlimFinancial.Domain.Dtos.ResponseDtos;
+namespace SlimFinancial.Domain.Dtos;
 
     /// <summary>
     /// Represents a response for a request to create a new transaction

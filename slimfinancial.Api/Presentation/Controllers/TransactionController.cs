@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Infrastructure.Services;
 
@@ -6,9 +7,9 @@ namespace SlimFinancial.Api.Controllers;
 
     [ApiController]
     [Route("Api/[Controller]")]
-    public class TransactionsController(TransactionService service) : ControllerBase
+    public class TransactionController(ITransactionService service) : ControllerBase
     {
-    private readonly TransactionService _service = service;
+    private readonly ITransactionService _service = service;
 
 
         [HttpGet]
@@ -21,7 +22,7 @@ namespace SlimFinancial.Api.Controllers;
         [Route("{acctNum}")]
         public async Task<IActionResult> GetTransactionsByAccountNumberAsync(string acctNum) 
         {
-            return Ok(await _service.GetByAccountNumber(acctNum));
+            return Ok(await _service.GetTransactionByAccountNumber(acctNum));
         }
 
         [HttpPost]
@@ -29,7 +30,7 @@ namespace SlimFinancial.Api.Controllers;
         {
         
             if (payload == null) return BadRequest();
-            var res = await _service.CreateTransaction(payload);
+            var res = await _service.CreateTransactionAsync(payload);
 
             switch (res.Status)
             {

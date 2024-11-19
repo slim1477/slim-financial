@@ -2,7 +2,6 @@
 
 using AutoMapper;
 using SlimFinancial.Domain.Dtos;
-using SlimFinancial.Domain.Dtos.ResponseDtos;
 using SlimFinancial.Domain.Models;
 
 namespace SlimFinancial.Infrastructure.Data.Configurations;
