@@ -6,7 +6,7 @@ using SlimFinancial.Api.UnitTest.Fixtures;
 using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 
-namespace SlimFinancial.Api.UnitTest.ControllerTest;
+namespace SlimFinancial.Api.UnitTest;
 
 public class TransactionControllerUnitTest
     {

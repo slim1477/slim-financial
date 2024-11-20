@@ -49,9 +49,8 @@ public class AuthController(IAuthService authService) : ControllerBase
             var res = await authService.Register(req);
             return res.Message switch
             {
-                "not found" => NotFound(res),
-                "not authorized" => Unauthorized(res),
-                "success" => Ok(res),
+                "Email already exists" => Conflict(res),
+                "Created" => Ok(res),
                 _ => BadRequest(res),
             };
         }

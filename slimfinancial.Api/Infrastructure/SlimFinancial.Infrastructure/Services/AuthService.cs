@@ -96,21 +96,22 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
         
         try
         {
-           var newUser = usernameExist != null ? throw new Exception("Email already exist") : new Person{
-                                                                                                        Fname = payload.Fname,
-                                                                                                        Lname = payload.Lname,
-                                                                                                        Address = payload.Address,
-                                                                                                        DateOfBirth = DateOnly.Parse(payload.DateOfBirth),
-                                                                                                        Email = payload.Email,
-                                                                                                        PhoneNumber = payload.PhoneNumber,
-                                                                                                        UserName = payload.Fname.ToCharArray()[0].ToString() + payload.Lname
-                                                                                                        };
-                    var isCreated = await _userManager.CreateAsync(newUser, payload.Password);
+           var newUser = usernameExist != null ? throw new Exception("Email already exist") : 
+                new Person{
+                                Fname = payload.Fname,
+                                Lname = payload.Lname,
+                                Address = payload.Address,
+                                DateOfBirth = DateOnly.Parse(payload.DateOfBirth),
+                                Email = payload.Email,
+                                PhoneNumber = payload.PhoneNumber,
+                                UserName = payload.Fname.ToCharArray()[0].ToString() + payload.Lname
+                           };
+
+            var isCreated = await _userManager.CreateAsync(newUser, payload.Password);
             if (isCreated.Succeeded)
             {
                 return new RegisterResponseDto
                 {
-                    //SessionToken = AuthenticationHelper.GenerateJwtToken(newUser, _jwtConfig),
                     Success = true,
                     Message = "Created",
                     SessionToken = AuthenticationHelper.GenerateJwtToken(newUser,_jwtConfig)
