@@ -5,7 +5,7 @@ namespace SlimFinancial.Domain.Dtos;
     /// <summary>
     /// Represents a data transfer object for registration request
     /// </summary>
-    public class RegisterRequestDto
+    public class PersonRegisterRequestDto
     {
     public string Fname { get; set; } = string.Empty;
     public string Lname { get; set; } = string.Empty;

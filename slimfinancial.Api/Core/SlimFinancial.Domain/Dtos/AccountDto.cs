@@ -12,6 +12,5 @@ namespace SlimFinancial.Domain.Dtos;
     public string Status {  get; set; } = string.Empty;
 
     public double Balance { get; set; }
-    public List<PersonDto> JointOwners { get; set; } = [];
     }
 

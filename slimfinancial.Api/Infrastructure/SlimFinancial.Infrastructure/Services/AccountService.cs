@@ -57,10 +57,10 @@ public class AccountService(AccountRepo repo, UserManager<Person> userManager,IM
     {
         try
         {
-            if (accountNumber.IsNullOrEmpty()) throw new Exception("account number cannot be null");
-            var account = await _repo.GetByAccountNumberAsync(accountNumber) ?? throw new ArgumentNullException($"Account number {accountNumber} not found");
+            if (accountNumber.IsNullOrEmpty()) throw new ArgumentNullException("account number cannot be null");
+            var account = await _repo.GetByAccountNumberAsync(accountNumber) ?? throw new ArgumentNullException($"Account {accountNumber} does not exist");
             _ = account.Balance < 0 ? throw new Exception("cannot close account with balance greater than 0") : await _repo.Close(account);
-            return new ReqResponseDto { Success = true, Message = $"Account with account number {account.AccountNumber} closed successfully" };
+            return new ReqResponseDto { Success = true, Message = $"Account number {account.AccountNumber} closed successfully" };
 
         }
         catch (Exception) 

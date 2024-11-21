@@ -12,7 +12,7 @@ using System;
 
 namespace SlimFinancial.Infrastructure.Services;
 // Represent authentication services
-public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jwt,AppDbContext dbContext,IMapper mapper) : IAuthService
+public class PersonService(UserManager<Person> userManager, IOptions<JwtConfig> jwt,AppDbContext dbContext,IMapper mapper) : IPersonService
 {
     private readonly UserManager<Person>  _userManager = userManager;
     private readonly IOptions<JwtConfig> _jwtConfig = jwt;
@@ -25,7 +25,7 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     /// </summary>
     /// <param name="req"></param>
     /// <returns>a registered user</returns>
-    private Person? GetUsernameType(LoginRequestDto req)
+    private Person? GetUsernameType(PersonLoginRequestDto req)
     {
         var isPan = Int32.TryParse(req.Username,out int result);
 
@@ -47,10 +47,10 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     /// </summary>
     /// <param name="req"></param>
     /// <returns>a valid token if user is authenticated</returns>
-    public async Task<LoginResponseDto> Login(LoginRequestDto req)
+    public async Task<PersonLoginResponseDto> Login(PersonLoginRequestDto req)
     {
         var userExists = GetUsernameType(req);
-        if (userExists == null) return new LoginResponseDto
+        if (userExists == null) return new PersonLoginResponseDto
         {
             SessionToken = "",
             Success = false,
@@ -58,13 +58,13 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
         };
         
         var authUser = await _userManager.CheckPasswordAsync(userExists, req.Password);
-        if (!authUser) return new LoginResponseDto
+        if (!authUser) return new PersonLoginResponseDto
         {
             SessionToken = "",
             Success = false,
             Message = "not authorized"
         };
-        return new LoginResponseDto
+        return new PersonLoginResponseDto
         {
             SessionToken = AuthenticationHelper.GenerateJwtToken(userExists, _jwtConfig),
             Success = true,
@@ -88,7 +88,7 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
     /// </summary>
     /// <param name="payload"></param>
     /// <returns>a registered user</returns>
-    public async Task<RegisterResponseDto> Register(RegisterRequestDto payload)
+    public async Task<PersonRegisterResponseDto> Register(PersonRegisterRequestDto payload)
     {
         var usernameExist = await _userManager.FindByEmailAsync(payload.Email);
         //var lastPersonNumber = await _dbContext.Persons.Select(x => Int32.Parse(x.PersonNumber)).MaxAsync();
@@ -110,7 +110,7 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
             var isCreated = await _userManager.CreateAsync(newUser, payload.Password);
             if (isCreated.Succeeded)
             {
-                return new RegisterResponseDto
+                return new PersonRegisterResponseDto
                 {
                     Success = true,
                     Message = "Created",
@@ -119,7 +119,7 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
             }
         }catch (Exception ex)
             {
-                return new RegisterResponseDto
+                return new PersonRegisterResponseDto
                        {
                            
                            Success = false,
@@ -127,7 +127,7 @@ public class AuthService(UserManager<Person> userManager, IOptions<JwtConfig> jw
                         };
             }
 
-        return new RegisterResponseDto
+        return new PersonRegisterResponseDto
         {
             Success = false,
             Message = "there was an error, please try again"

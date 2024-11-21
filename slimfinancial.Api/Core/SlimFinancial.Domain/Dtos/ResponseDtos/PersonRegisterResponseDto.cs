@@ -9,7 +9,7 @@ namespace SlimFinancial.Domain.Dtos;
     /// <summary>
     /// Represents the response for a registeration session
     /// </summary>
-    public class RegisterResponseDto
+    public class PersonRegisterResponseDto
     {
         public bool Success { get; set; }
         public string Message { get; set; } = string.Empty;

@@ -4,11 +4,11 @@ using SlimFinancial.Domain.Dtos;
 
 namespace SlimFinancial.Api.UnitTest.Fixtures;
 
-    public class AuthenticationFixture
+    public class PersonFixture
     {
-       public static LoginRequestDto GetLoginRequest()
+       public static PersonLoginRequestDto GetLoginRequest()
         {
-        return new LoginRequestDto
+        return new PersonLoginRequestDto
         {
             Username = "testUser",
             Password = "password",

@@ -10,17 +10,17 @@ using SlimFinancial.Domain.Dtos;
 
 namespace SlimFinancial.Api.UnitTest;
 
-    public class AuthControllerUnitTest
+    public class PersonControllerUnitTest
     {
        [Fact]
        public async Task Login_OnSuccess_ReturnStatusCode200()
         {
-            var mockLoginRequest = AuthenticationFixture.GetLoginRequest();
+            var mockLoginRequest = PersonFixture.GetLoginRequest();
             //Arrange
-            var mockAuthService = new Mock<IAuthService>();
-            mockAuthService.Setup(serice => serice.Login(It.IsAny<LoginRequestDto>()))
-                          .ReturnsAsync(new LoginResponseDto { Message = "success"});
-            var mockAuthController = new AuthController(mockAuthService.Object);
+            var mockAuthService = new Mock<IPersonService>();
+            mockAuthService.Setup(serice => serice.Login(It.IsAny<PersonLoginRequestDto>()))
+                          .ReturnsAsync(new PersonLoginResponseDto { Message = "success"});
+            var mockAuthController = new PersonController(mockAuthService.Object);
             //Act
             var result = (OkObjectResult) await mockAuthController.Login(mockLoginRequest);
             //Assert
@@ -30,12 +30,12 @@ namespace SlimFinancial.Api.UnitTest;
         [Fact]
         public async Task Login_OnFailure_ReturnStatusCode401()
         {
-            var mockLoginRequest = AuthenticationFixture.GetLoginRequest();
+            var mockLoginRequest = PersonFixture.GetLoginRequest();
             //Arrange
-            var mockAuthService = new Mock<IAuthService>();
+            var mockAuthService = new Mock<IPersonService>();
             mockAuthService.Setup(serice => serice.Login(mockLoginRequest))
-                          .ReturnsAsync(new LoginResponseDto { Message = "not authorized" });
-            var mockAuthController = new AuthController(mockAuthService.Object);
+                          .ReturnsAsync(new PersonLoginResponseDto { Message = "not authorized" });
+            var mockAuthController = new PersonController(mockAuthService.Object);
             //Act
             var result = (UnauthorizedObjectResult)await mockAuthController.Login(mockLoginRequest);
             //Assert
@@ -47,12 +47,12 @@ namespace SlimFinancial.Api.UnitTest;
         [Fact]
         public async Task Login_OnFailure_ReturnStatusCode400()
         {
-            var mockLoginRequest = AuthenticationFixture.GetLoginRequest();
+            var mockLoginRequest = PersonFixture.GetLoginRequest();
             //Arrange
-            var mockAuthService = new Mock<IAuthService>();
+            var mockAuthService = new Mock<IPersonService>();
             mockAuthService.Setup(serice => serice.Login(mockLoginRequest))
-                          .ReturnsAsync(new LoginResponseDto());
-            var mockAuthController = new AuthController(mockAuthService.Object);
+                          .ReturnsAsync(new PersonLoginResponseDto());
+            var mockAuthController = new PersonController(mockAuthService.Object);
             //Act
             var result = (BadRequestObjectResult)await mockAuthController.Login(mockLoginRequest);
             //Assert
@@ -63,11 +63,11 @@ namespace SlimFinancial.Api.UnitTest;
         public async Task Register_OnSucess_ReturnStatusCode200()
         {
             // Arrange
-            var mockAuthService = new Mock<IAuthService>();
-            var mockRegisterRequest = It.IsAny<RegisterRequestDto>();
+            var mockAuthService = new Mock<IPersonService>();
+            var mockRegisterRequest = It.IsAny<PersonRegisterRequestDto>();
             mockAuthService.Setup(service => service.Register(mockRegisterRequest))
-                            .ReturnsAsync(new RegisterResponseDto { Message = "Created"});
-            var mockAuthController = new AuthController (mockAuthService.Object);
+                            .ReturnsAsync(new PersonRegisterResponseDto { Message = "Created"});
+            var mockAuthController = new PersonController (mockAuthService.Object);
             // Act
             var result = (OkObjectResult) await mockAuthController.Register(mockRegisterRequest);
             // Assert
@@ -78,11 +78,11 @@ namespace SlimFinancial.Api.UnitTest;
         public async Task Register_WithEmailExists_ReturnStatusCode409()
         {
             // Arrange
-            var mockAuthService = new Mock<IAuthService>();
-            var mockRegisterRequest = It.IsAny<RegisterRequestDto>();
+            var mockAuthService = new Mock<IPersonService>();
+            var mockRegisterRequest = It.IsAny<PersonRegisterRequestDto>();
             mockAuthService.Setup(service => service.Register(mockRegisterRequest))
-                            .ReturnsAsync(new RegisterResponseDto { Message = "Email already exists" });
-            var mockAuthController = new AuthController(mockAuthService.Object);
+                            .ReturnsAsync(new PersonRegisterResponseDto { Message = "Email already exists" });
+            var mockAuthController = new PersonController(mockAuthService.Object);
             // Act
             var result = (ConflictObjectResult)await mockAuthController.Register(mockRegisterRequest);
             // Assert
@@ -93,11 +93,11 @@ namespace SlimFinancial.Api.UnitTest;
         public async Task Register_OnFail_ReturnStatusCode400()
         {
             // Arrange
-            var mockAuthService = new Mock<IAuthService>();
-            var mockRegisterRequest = It.IsAny<RegisterRequestDto>();
+            var mockAuthService = new Mock<IPersonService>();
+            var mockRegisterRequest = It.IsAny<PersonRegisterRequestDto>();
             mockAuthService.Setup(service => service.Register(mockRegisterRequest))
-                            .ReturnsAsync(new RegisterResponseDto());
-            var mockAuthController = new AuthController(mockAuthService.Object);
+                            .ReturnsAsync(new PersonRegisterResponseDto());
+            var mockAuthController = new PersonController(mockAuthService.Object);
             // Act
             var result = await mockAuthController.Register(mockRegisterRequest);
             // Assert

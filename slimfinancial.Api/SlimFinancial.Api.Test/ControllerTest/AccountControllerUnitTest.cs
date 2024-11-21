@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SlimFinancial.Api.Controllers;
@@ -31,8 +32,8 @@ public class AccountControllerUnitTest
     {
         //Arrange
         var mockAccountService = new Mock<IAccountService>();
-        mockAccountService.Setup(service => service.OpenAccount(AccountFixture.AccountOpenFail()))
-                          .ReturnsAsync(new ReqResponseDto());
+        mockAccountService.Setup(service => service.OpenAccount(It.IsAny<AccountOpenReqDto>())).ThrowsAsync(new ArgumentNullException());
+                          //.ReturnsAsync(new ReqResponseDto());
         var accountController = new AccountController(mockAccountService.Object);
         // Act
         var result = (UnprocessableEntityObjectResult)await accountController.OpenAccount(AccountFixture.AccountOpenFail());
@@ -57,8 +58,8 @@ public class AccountControllerUnitTest
     {
         //Arrange
         var mockAccountService = new Mock<IAccountService>();
-        mockAccountService.Setup(service => service.CloseAccount(""))
-                      .ReturnsAsync(new ReqResponseDto());
+        mockAccountService.Setup(service => service.CloseAccount(It.IsAny<string>()))
+                           .ThrowsAsync(new ArgumentNullException());
         var accountController = new AccountController(mockAccountService.Object);
         // Act
         var result = (UnprocessableEntityObjectResult)await accountController.CloseAccount("");

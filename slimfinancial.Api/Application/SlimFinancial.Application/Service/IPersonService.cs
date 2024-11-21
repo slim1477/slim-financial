@@ -6,10 +6,10 @@ using SlimFinancial.Domain.Models;
 namespace SlimFinancial.Application.Service;
 
 // represents basic authentication service
-public interface IAuthService
+public interface IPersonService
 {
-    Task<LoginResponseDto> Login(LoginRequestDto req);
-    Task<RegisterResponseDto> Register(RegisterRequestDto req);
+    Task<PersonLoginResponseDto> Login(PersonLoginRequestDto req);
+    Task<PersonRegisterResponseDto> Register(PersonRegisterRequestDto req);
     Task<IEnumerable<PersonDto>> GetAll();
     void Logout();
 }

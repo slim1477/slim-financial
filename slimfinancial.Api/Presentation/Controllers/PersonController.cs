@@ -6,18 +6,18 @@ namespace SlimFinancial.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(IAuthService authService) : ControllerBase
+public class PersonController(IPersonService personService) : ControllerBase
     {
 
     [HttpPost]
     [Route("login")]
-        public  async Task<IActionResult> Login([FromBody] LoginRequestDto req)
+        public  async Task<IActionResult> Login([FromBody] PersonLoginRequestDto req)
         {
         
         if (ModelState.IsValid) 
         {
-            var res = await authService.Login(req);
-            var response = new LoginResponseDto
+            var res = await personService.Login(req);
+            var response = new PersonLoginResponseDto
             {
                 SessionToken = res.SessionToken,
                 Success = res.Success,
@@ -42,11 +42,11 @@ public class AuthController(IAuthService authService) : ControllerBase
 
     [HttpPost]
     [Route("Register")]
-    public async Task<IActionResult> Register([FromBody] RegisterRequestDto req)
+    public async Task<IActionResult> Register([FromBody] PersonRegisterRequestDto req)
     {
         if (ModelState.IsValid)
         {
-            var res = await authService.Register(req);
+            var res = await personService.Register(req);
             return res.Message switch
             {
                 "Email already exists" => Conflict(res),
@@ -60,7 +60,7 @@ public class AuthController(IAuthService authService) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetPersons()
     {
-        var res = await authService.GetAll();
+        var res = await personService.GetAll();
         return Ok(res);
     }
 }
