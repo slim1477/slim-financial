@@ -1,6 +1,6 @@
 import { Component, computed,  signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '../../core/common/material/material.module';
+import { MaterialModule } from '../../../core/common/material/material.module';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 

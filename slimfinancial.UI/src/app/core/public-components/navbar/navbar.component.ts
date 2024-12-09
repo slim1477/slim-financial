@@ -4,8 +4,9 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MaterialModule } from '../../common/material/material.module';
-import { HeroComponent } from '../../home-page-sections/hero/hero.component';
+
 import { Router, RouterOutlet } from '@angular/router';
+import { HeroComponent } from '../hero/hero.component';
 
 @Component({
   selector: 'app-navbar',
@@ -47,8 +48,8 @@ export class NavbarComponent {
       
     }
     gotoLogin(){
-      this.router.navigate(["login"])
-      // console.log("I was clicked")
+      this.router.navigate(["authentication/login"])
+      console.log("I was clicked")
     }
 }
  

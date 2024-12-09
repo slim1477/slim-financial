@@ -33,10 +33,3 @@ li > mat-icon{
     border-top-right-radius: 50%;
     color: white;
  }
- .footer{
-    padding: 1rem !important;
-    text-align: center;
- }
- .footer p{
-    color: #eee;
- }
