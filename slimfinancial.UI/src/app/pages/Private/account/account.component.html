@@ -1,1 +1,34 @@
-<p>account works!</p>
+<div class="container is-fluid ">
+    <div class="columns mx-6">
+        @for(account of accounts.accounts();track account.id){
+            <div class="column" (click)="setCurrentAccount(account)">
+                <app-widget data="" location="top" [component]="'account'"/>
+            </div>
+         }
+       
+    </div>
+   
+</div> 
+    <div class="container is-fluid mt-5 mb-5">
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="mx-4 mb-2">
+            @for (link of links; track link) {
+                <a mat-tab-link
+                class="button is-link is-inverted mx-3"
+                  [routerLink]="link.route"
+                  > {{link.label}} 
+                </a>
+              }
+        </nav>
+        <div class="tab-panel" >
+            <mat-tab-nav-panel #tabPanel >
+                <router-outlet ></router-outlet>
+            </mat-tab-nav-panel>
+            <!-- <button mat-raised-button class="example-action-button" (click)="addLink()">
+                Add link
+              </button> -->
+        </div>
+    </div>
+  
+
+
+

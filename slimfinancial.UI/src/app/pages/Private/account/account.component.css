@@ -1,0 +1,23 @@
+.column{
+    cursor: pointer;
+}
+.is-link{
+    background-color: deepskyblue;
+}
+.tab-panel{
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    /* height: 60vh; */
+
+}
+.container{
+    position: unset;
+}
+.clearfix{
+    content: "";
+    
+  }
+/* mat-tab-nav-panel{
+    position: relative;
+    background-color: rebeccapurple !important;
+} */

@@ -1,10 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { WidgetComponent } from '../../../core/private-components/widget/widget.component';
-
+import { WidgetComponent } from '../../../core/components/private-components/widget/widget.component';
 import { WidgetService } from '../../../services/widget.service';
-import { WidgetData } from '../../../core/common/models/widget';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { WidgetOptionsComponent } from '../../../core/private-components/widget-options/widget-options.component';
+import { WidgetOptionsComponent } from '../../../core/components/private-components/widget-options/widget-options.component';
 import { MaterialModule } from '../../../core/common/material/material.module';
 
 @Component({
@@ -17,7 +14,6 @@ import { MaterialModule } from '../../../core/common/material/material.module';
 
 })
 export class OverviewComponent {
-location = ''
   widgetStore = inject(WidgetService)
  
 }

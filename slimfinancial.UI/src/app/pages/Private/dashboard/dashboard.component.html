@@ -1,9 +1,7 @@
 
-    <mat-toolbar class=" container is-fluid mat-elevation-z3">
-    </mat-toolbar>
     <mat-sidenav-container>
         <mat-sidenav opened mode="side" [style.width] = navWidth()>
-            <div id="test" [class]= btnClass()>
+            <div id="test" [class]= "btnClass()">
                 <button mat-icon-button (click)="toggleIsOpened()">
                     <mat-icon>{{iconType()}}</mat-icon> 
                 </button>
@@ -11,14 +9,10 @@
             <div>
                 <app-dashboard-nav [isOpened]="isOpened()"></app-dashboard-nav>
             </div>
-            
         </mat-sidenav>
-        <mat-sidenav-content class="content" [style.margin-left] = navWidth()>
+        <mat-sidenav-content class="content pt-5" [style.margin-left] = navWidth()>
         <router-outlet></router-outlet>
-       
-      
         </mat-sidenav-content>
-        
     </mat-sidenav-container>
     <app-footer ></app-footer>
     

@@ -1,0 +1,54 @@
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { Router, RouterOutlet } from '@angular/router';
+import { HeroComponent } from '../hero/hero.component';
+import { MaterialModule } from '../../../common/material/material.module';
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css',
+  standalone: true,
+  imports: [
+  MaterialModule,
+    AsyncPipe,
+    NgTemplateOutlet,
+    HeroComponent,
+    RouterOutlet
+  ]
+})
+export class NavbarComponent {
+
+  constructor(private router: Router){}
+  private breakpointObserver = inject(BreakpointObserver);
+  
+  @Input()
+  btnClicked : boolean = false;
+  
+  @Output()
+  Clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+    // handles hamburger button click event
+    handleBtnClick(){
+      this.btnClicked = this.btnClicked ? false : true;
+      if(this.isHandset$){
+        this.Clicked.emit(this.btnClicked);
+      }
+      
+    }
+    gotoLogin(){
+      this.router.navigate(["authentication/login"])
+      console.log("I was clicked")
+    }
+}
+ 

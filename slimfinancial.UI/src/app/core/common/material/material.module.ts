@@ -10,7 +10,11 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
 
 const material = [
@@ -26,11 +30,16 @@ const material = [
   MatCardModule,
   MatDividerModule,
   MatGridListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTabGroup,
+  MatTableModule,
+  MatSelectModule,
+  MatInputModule,
+
 ]
 
 @NgModule({
-  imports: [material],
-  exports:[material]
+  imports: [material, MatRadioButton, MatRadioGroup],
+  exports:[material, MatRadioButton, MatRadioGroup]
 })
 export class MaterialModule { }

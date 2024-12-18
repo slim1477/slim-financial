@@ -1,0 +1,23 @@
+/* .column{
+    border-radius: 16px;
+}
+.widget-container{
+    border: 2px;
+}
+.top-widget{
+    height: 20vh;
+}
+.bottom-widget{
+    height: 50vh;
+} */
+.widget{
+    border-radius: 15px;
+}
+button{
+    position: absolute;
+    right:0;
+    cursor: pointer;
+}
+/* .setting{
+    transform: (180deg) !important;
+} */

@@ -1,0 +1,37 @@
+
+<div class="container is-fluid mt-5">
+    <div class="columns ">
+        <div class="column is-one-fifth button-column">
+            <button mat-raised-button>Transfer</button>
+            <button mat-raised-button>Bill Payment</button>
+            <button mat-raised-button>E-Transfer</button>
+        </div>
+        <div class="column mx-5 form-column">
+            <form [formGroup]="regularTransferForm" class="mb-5">
+                <mat-label class="ml-3">Transfer To: </mat-label>
+                <mat-radio-group >
+                <mat-radio-button value="myAccount">My Account</mat-radio-button>
+                <mat-radio-button value="anotherCustomer">Another Customer</mat-radio-button>
+                </mat-radio-group>
+               
+                <mat-form-field class="mt-5">
+                    <mat-label>From</mat-label>
+                    <input matInput [value]="accountNumber()">
+                  </mat-form-field>
+                  <mat-form-field >
+                    <mat-label>To</mat-label>
+                    <mat-select>
+                      <mat-option value="one">First option</mat-option>
+                      <mat-option value="two">Second option</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field > 
+                    <mat-label>Amount</mat-label>
+                    <input matInput >
+                  </mat-form-field>
+                  <button mat-raised-button>Transfer</button>
+            </form>
+            
+        </div>
+    </div>
+</div>

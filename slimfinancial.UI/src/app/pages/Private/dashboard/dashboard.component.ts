@@ -1,8 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { MaterialModule } from '../../../core/common/material/material.module';
 import { RouterModule } from '@angular/router';
-import { DashboardNavComponent } from '../../../core/private-components/dashboard-nav/dashboard-nav.component';
-import { FooterComponent } from '../../../core/shared/footer/footer.component';
+import { DashboardNavComponent } from '../../../core/components/private-components/dashboard-nav/dashboard-nav.component';
+import { FooterComponent } from '../../../core/components/shared/footer/footer.component';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { FooterComponent } from '../../../core/shared/footer/footer.component';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
 
   isOpened = signal<boolean>(true);
   btnClass = computed(() => !this.isOpened() ? 'is-flex is-justify-content-center' : 'is-flex is-justify-content-right')
@@ -21,5 +21,9 @@ export class DashboardComponent {
 
   toggleIsOpened(){
     this.isOpened.set(!this.isOpened());
+  }
+
+  ngOnInit(): void {
+    this.isOpened.set(false)
   }
 }

@@ -4,9 +4,10 @@ import { LoginComponent } from '../../pages/Auth/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const authRoute : Routes = [
-  {path:"",
+  {path:"",component:LoginComponent,
     children:[
-      {path:'login',component:LoginComponent}
+      {path:'login',component:LoginComponent},
+      {path:'',redirectTo:'login',pathMatch:'full'}
     ]
   }
 ]

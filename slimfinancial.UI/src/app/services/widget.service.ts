@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { WidgetData } from '../core/common/models/widget';
-import { WidgetComponent } from '../core/private-components/widget/widget.component';
+import { WidgetComponent } from '../core/components/private-components/widget/widget.component';
 
 
 enum reportPeriod {

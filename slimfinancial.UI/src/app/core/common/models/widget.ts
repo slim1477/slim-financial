@@ -1,4 +1,4 @@
-import { Signal, Type } from "@angular/core";
+import {Type } from "@angular/core";
 
 export interface WidgetData{
     id: number;

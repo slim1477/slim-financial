@@ -1,0 +1,18 @@
+<div [@showOptions]="showOptions()" class="mat-elevation-z3 widget"
+  [style.BackgroundColor]= "backgroundColor" 
+  [style.Height]= "height">
+    @if(showOptions()){
+        <app-widget-options [(showOptions)] = showOptions (backgroundColor) = "setBackgroundColor($event)"></app-widget-options>
+    }
+    @if(!showOptions()){
+        <button mat-icon-button  (click) = "showSelectedTab()" >
+            <mat-icon>settings</mat-icon>
+        </button>
+       <p>Widget works!</p>
+    }
+</div>
+
+
+
+
+
