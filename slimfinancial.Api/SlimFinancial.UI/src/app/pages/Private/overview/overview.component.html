@@ -1,0 +1,22 @@
+<div class="container is-fluid mt-5">
+    <div class="columns is-2 is-tablet">
+        @for(widget of widgetStore.widgets();track widget.id){
+            <div class="column " >  
+                <app-widget [data] = "" location ="top" [component]="'dashboard'"></app-widget>     
+            </div> 
+        }
+    </div>
+</div>
+<div class="container is-fluid my-3">
+<div class="columns is-2">
+    <div class="column is-three-fifths">
+        <app-widget [data] = "" location="bottom" [component]="'dashboard'"></app-widget>
+    </div>
+    <div class="column">
+        <app-widget [data] = "" location="bottom" [component]="'dashboard'"></app-widget>
+    </div>
+</div>
+</div>
+
+
+

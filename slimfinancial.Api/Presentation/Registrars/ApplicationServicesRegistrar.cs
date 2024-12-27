@@ -11,7 +11,7 @@ public class ApplicationServicesRegistrar : IWebApplicationBuilderRegistrar
 {
     public void RegisterServices(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IPersonService, PersonService>();
+        builder.Services.AddTransient<IPersonService, PersonService>();
         builder.Services.AddScoped<IAccountService, AccountService>();
         builder.Services.AddScoped<ITransactionService, TransactionService>();
     }

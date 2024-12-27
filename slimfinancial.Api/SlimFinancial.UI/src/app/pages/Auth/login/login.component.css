@@ -1,0 +1,136 @@
+.columns{
+    position: relative;
+}
+.left-column{
+    height: 100vh;
+    width: 60vw;
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../../../../public/mountain.jpg");
+    background-position: 2%;
+    background-size:cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: absolute;
+    animation-name: left-slide;
+    animation-duration: 5s;
+}
+
+.content > p:first-of-type{
+    line-height: 1px;
+}
+.cred-container > mat-card{
+    border-radius: 0 0 10px 10px !important;
+    margin: 0  35px;
+    align-content: center;
+}
+
+mat-card{
+    padding: 20%;
+}
+.cred-container > button:first-of-type{
+    border-radius: 0 0 10px 10px;
+    width: 20%;
+    
+}
+
+.right-column{
+    align-content: center;
+    background-color: white;
+    height: 100vh;
+    right: 0;
+    position: absolute;
+    width: 40vw !important;
+    padding-inline: 8%;
+    animation-name: right-slide;
+    animation-duration: 5s;
+}
+span{
+    color: black;
+    float: inline-end;
+    font-weight: 200 !important;
+}
+input[type=text]{
+    border: 1px solid;
+    margin-top: 8px !important;
+    width: 100%;
+    padding: .7rem;
+}
+input[type=checkbox]{
+    margin-top: 1rem;
+   height: 2rem;
+   width: 2rem;
+}
+.clearfix{
+    float: none !important;
+    margin-left: 10px;
+}
+
+form > label{
+   font-weight: 400;
+   color: black;
+}
+form > button{
+    border-radius: 0%;
+    background-color: #006AC3;
+    font-weight: 100;
+    font-size: 18px;
+    margin-top: 1rem;
+    padding: 1.5rem !important;
+    width: 100%; 
+
+}
+.wrapper {
+    position: relative ;
+    display: flex;
+    overflow: hidden;
+  }
+.un-input {
+    flex: 1 0 100% ;
+  }
+  .pw-input {
+    flex: 1 0 100% ;
+  }
+
+@keyframes right-slide{
+    from {
+        right: -40vw;
+      }
+       to {
+        right: 0;
+      }
+}
+@keyframes left-slide{
+    from {
+        width:100vw;
+      }
+       to {
+        width:60vw;
+      }
+}
+
+@media screen and (max-width:768px) {
+    .columns{
+        position: unset;
+        
+    }
+   
+    .right-column,.left-column{
+        position: unset;
+        width: 100vw !important;
+        animation: none;
+        overflow: hidden;
+    }
+    .left-column{
+        align-content: center;
+        background-size: cover;
+        margin: auto;
+        height: 20vh;
+        
+    }
+    .right-column{
+        height: 80vh;
+        align-content: normal;
+        padding-top: 20%;
+       
+    }
+    
+}

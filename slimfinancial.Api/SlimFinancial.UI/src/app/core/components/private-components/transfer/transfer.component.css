@@ -1,0 +1,35 @@
+
+/* .columns{
+height: 57vh;
+} */
+form{
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    width: 100%;
+}
+.button-column{
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    >button{
+        width: 100%;
+        margin-bottom: 3.5rem;
+    }
+}
+.form-column{
+    display: flex;
+    justify-content: center;
+    position: inherit;
+}
+@media screen and (max-width: 720px) {
+    .button-column{
+        flex-direction: row !important;
+        > button{
+            width: 35%;
+            margin-right: 3px;
+            
+        }
+    }
+}

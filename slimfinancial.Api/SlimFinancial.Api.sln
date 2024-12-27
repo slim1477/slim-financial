@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6134A447
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{7BDC0D7D-B4E5-4EB6-A9F1-090BBE980DFC}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "SlimFinancial.UI", "SlimFinancial.UI\SlimFinancial.UI.esproj", "{52F4692A-791A-4347-8F85-0B8E1D25781A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,12 @@ Global
 		{7C02F0C6-35A9-4E60-A579-5BD0731F7F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C02F0C6-35A9-4E60-A579-5BD0731F7F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C02F0C6-35A9-4E60-A579-5BD0731F7F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52F4692A-791A-4347-8F85-0B8E1D25781A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F4692A-791A-4347-8F85-0B8E1D25781A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F4692A-791A-4347-8F85-0B8E1D25781A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{52F4692A-791A-4347-8F85-0B8E1D25781A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F4692A-791A-4347-8F85-0B8E1D25781A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52F4692A-791A-4347-8F85-0B8E1D25781A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

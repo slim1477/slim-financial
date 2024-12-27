@@ -13,7 +13,18 @@ namespace SlimFinancial.Api.Registrars;
                 app.UseSwaggerUI();
             }
 
+        app.Use(async (context, next) =>
+        {
+            await next();
+            if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+            { 
+                context.Request.Path = "/index/html";
+            }
+        });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
+            app.UseCors("default");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

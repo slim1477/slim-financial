@@ -1,0 +1,38 @@
+img{
+  width: 30px;
+}
+.mat-toolbar.mat-primary {
+  top: 0;
+  z-index: 1;
+  background-color: blue;
+}
+.navbar{
+  background: transparent;
+}
+
+.navbar-item{
+  margin-right: 60px;
+  background-color: transparent !important;
+}
+.navbar-end >.navbar-item:hover{
+  border-radius: 0;
+  border-bottom: 2px solid blue;
+  padding-bottom: 3px;
+  transform: none;
+}
+
+.navbar-burger > button ,.mat-mdc-icon-button{
+  background-color: transparent !important;
+  border: none;
+}
+.top-nav > p:first-child{
+  border-bottom:1px solid white ;
+}
+.bottom-nav{
+  border-bottom: 2px solid rgba(97, 97, 99, 0.5);
+}
+button{
+  border: 1px solid white;
+  border-radius:0%;
+}
+

@@ -9,6 +9,7 @@ namespace SlimFinancial.Domain.Dtos;
     public string Type { get; set; } = string.Empty;
     public double Amount { get; set; }
     public string AccountNumber { get; set; } = string.Empty;
+    public double Balance { get; set; }
 
-    }
+}
 

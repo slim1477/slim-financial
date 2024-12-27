@@ -26,6 +26,7 @@ namespace SlimFinancial.Api.Controllers;
         }
 
         [HttpPost]
+        [Route("post")]
         public async Task<IActionResult> CreateTransaction([FromBody] TransactionReqDto payload)
         {
         

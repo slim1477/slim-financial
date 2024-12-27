@@ -13,10 +13,21 @@ namespace SlimFinancial.Api.Registrars;
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("default", builder =>
+                {
+                    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                });
+            });
             builder.Services.AddSwaggerGen();
            
         }
     }
 
+//o => o.AddPolicy("MyPolicy", builder =>
+//{
+//    builder.WithOrigins("*")
+//           .AllowAnyMethod()
+//           .AllowAnyHeader();

@@ -11,5 +11,6 @@ public interface IPersonService
     Task<PersonLoginResponseDto> Login(PersonLoginRequestDto req);
     Task<PersonRegisterResponseDto> Register(PersonRegisterRequestDto req);
     Task<IEnumerable<PersonDto>> GetAll();
+    Task<PersonDto> GetByPersonNumber(string id);
     void Logout();
 }

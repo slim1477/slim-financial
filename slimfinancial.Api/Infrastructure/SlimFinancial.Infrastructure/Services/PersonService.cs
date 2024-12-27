@@ -7,7 +7,6 @@ using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models;
 using SlimFinancial.Infrastructure.Data;
 using SlimFinancial.Infrastructure.Helper;
-using System;
 
 
 namespace SlimFinancial.Infrastructure.Services;
@@ -139,6 +138,10 @@ public class PersonService(UserManager<Person> userManager, IOptions<JwtConfig> 
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Gets all persons
+    /// </summary>
+    /// <returns>list of person</returns>
     public  async Task<IEnumerable<PersonDto>> GetAll()
     {
         var persons =  await _dbContext.Persons.ToListAsync();
@@ -146,5 +149,12 @@ public class PersonService(UserManager<Person> userManager, IOptions<JwtConfig> 
         
 
     }
+
+    public async Task<PersonDto> GetByPersonNumber(string personNumber)
+    {
+        var persons = await _dbContext.Persons.FindAsync(Int32.Parse(personNumber));
+        return _mapper.Map<PersonDto>(persons);
+    }
+
 }
         

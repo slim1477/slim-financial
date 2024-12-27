@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 
@@ -6,6 +7,7 @@ namespace SlimFinancial.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class AccountController(IAccountService service) : ControllerBase
 {

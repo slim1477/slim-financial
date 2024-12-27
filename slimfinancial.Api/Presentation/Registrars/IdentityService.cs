@@ -15,6 +15,7 @@ public class IdentityService : IWebApplicationBuilderRegistrar
             options.SignIn.RequireConfirmedAccount = false;
         }).AddEntityFrameworkStores<AppDbContext>()
           .AddDefaultTokenProviders();
+       
     }
 }
 
