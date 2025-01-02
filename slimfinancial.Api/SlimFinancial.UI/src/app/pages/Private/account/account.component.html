@@ -1,35 +1,28 @@
-<div
-  class="container is-fluid"
-  [style.width]="accounts.length != 0 ? '100%' : '50%'"
->
-  <div class="columns mx-6">
-    @if(accounts.length != 0){ @for(account of accounts;let i = $index;track
-    account.accountNumber){
-    <div
-      class="column mat-elevation-z3 m-3"
-      (click)="setCurrentAccount(account.accountNumber)"
-    >
-      <button
-        mat-icon-flat
-        class="active"
-        [style.visibility]="checkIsActive(i)  ? 'visible' : 'hidden'"
-      >
+<div class="container is-fluid"
+     [style.width]="accounts().length != 0 ? '60%' : '50%'">
+  <div class="columns ">
+    @if(accounts().length != 0){
+    @for(account of accounts();let i = $index;track i){
+    <div class="column mat-elevation-z3 m-3"
+         (click)="setCurrentAccount(account)">
+      @if(account.isCurrent){
+      <button mat-icon-flat
+              class="active">
         <mat-icon>star</mat-icon>
       </button>
-
+      }
       <div class="mt-1">
-        <h5>Account Type: {{ account.type }}</h5>
+        <h5>Type: {{ account.type }}</h5>
         <h3>Balance: {{ account.balance | currency }}</h3>
         <h5>Account Number : {{ account.accountNumber }}</h5>
       </div>
 
       <!-- <app-widget data="" location="top" [component]="'account'"/> -->
     </div>
-    } }@else{
+    }
+    }@else{
 
-    <div
-      class="column p-5 has-background-primary mb-5 placeholder mat-elevation-z3"
-    >
+    <div class="column p-5 has-background-primary mb-5 placeholder mat-elevation-z3">
       No accounts to display
     </div>
     }
@@ -38,11 +31,9 @@
 <div class="container is-fluid mt-5 mb-5">
   <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="mx-4 mb-2">
     @for (link of links; track link) {
-    <a
-      mat-tab-link
-      class="button is-link is-inverted mx-3"
-      [routerLink]="link.route"
-    >
+    <a mat-tab-link
+       class="button is-link is-inverted mx-3"
+       [routerLink]="link.route">
       {{ link.label }}
     </a>
     }

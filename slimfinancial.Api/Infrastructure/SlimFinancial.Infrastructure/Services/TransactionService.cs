@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using SlimFinancial.Application.Service;
 using SlimFinancial.Domain.Dtos;
 using SlimFinancial.Domain.Models;
+using SlimFinancial.Domain.Models.Common;
 using SlimFinancial.Infrastructure.Data.Repository;
 
 
@@ -58,6 +59,7 @@ public class TransactionService(TransactionRepo repo,IAccountService service,IMa
                 case true:
                    var transaction = await _service.Credit(trans.DestinationAccountNumber,trans.TransactionAmount);
                     transaction.Description = "Initial Deposit";
+                    transaction.TransactionType = TransactionType.Credit.ToString();
                     transactions.Add(transaction);
                 break;
                 case false:
@@ -65,6 +67,8 @@ public class TransactionService(TransactionRepo repo,IAccountService service,IMa
                     var creditTransaction = await _service.Credit(trans.DestinationAccountNumber, trans.TransactionAmount);
                     debitTransaction.Description = $"transfer to {trans.DestinationAccountNumber}";
                     creditTransaction.Description = $"transfer from {trans.SourceAcctNumber}";
+                    debitTransaction.TransactionType = TransactionType.Debit.ToString();
+                    creditTransaction.TransactionType = TransactionType.Credit.ToString(); 
                     transactions.Add(debitTransaction);
                     transactions.Add(creditTransaction);
                 break;

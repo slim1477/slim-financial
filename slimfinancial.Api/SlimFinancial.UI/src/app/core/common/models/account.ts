@@ -1,8 +1,9 @@
 
 export interface Account {
-personNumber : string,
-accountNumber : string,
-type : string,
-balance : number
+  personNumber: string;
+  accountNumber: string;
+  type: string;
+  balance: number;
+  isCurrent: boolean
 }
 

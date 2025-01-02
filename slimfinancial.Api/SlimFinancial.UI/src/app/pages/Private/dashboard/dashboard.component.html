@@ -1,26 +1,49 @@
 
-    <mat-sidenav-container>
-        <mat-sidenav opened mode="side" [style.width] = navWidth()>
-            <div id="test" [class]= "btnClass()">
-                <button mat-icon-button (click)="toggleIsOpened()">
-                    <mat-icon>{{iconType()}}</mat-icon> 
-                </button>
-            </div>
-            <div class="nav-list">
-                <app-dashboard-nav [isOpened]="isOpened()"></app-dashboard-nav>
-            </div>
-            <div class="logout mt-5" style="transform: rotateY(-180deg);" (click)="logout()">
-                <button>
-                    <mat-icon>exit_to_app</mat-icon>
-                </button>
-            </div>
-        </mat-sidenav>
-        <mat-sidenav-content class="content pt-5" [style.margin-left] = navWidth()>
-        <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-    <app-footer ></app-footer>
-    
-    
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" [style.width]=navWidth()>
+    <!--<div id="test" [class]="btnClass()">
+    <button mat-icon-button (click)="toggleIsOpened()">
+      <mat-icon>{{iconType()}}</mat-icon>
+    </button>
+  </div>-->
+    <div class="is-flex is-flex-direction-column is-justify-content-center">
+      <div id="test" [class]="btnClass()">
+        <button mat-icon-button (click)="toggleIsOpened()">
+          <mat-icon>{{iconType()}}</mat-icon>
+        </button>
+      </div>
+      <div [class]="isOpened() ?  'nav-header pt-3' : 'nav-header'" [style.height]="isOpened() ? '10rem' : '3rem'" [style.width]="isOpened() ? '10rem' : '3rem'">
+        <p [style.font-size]="isOpened() ? '50px':'15px'" [style.padding-top]="isOpened() ? '45px':'10px'">{{authPerson().fname | slice : -3 }}</p>
+      </div>
+      @if(isOpened()){
+      <h5 class="ml-6">{{authPerson().fname + " " + authPerson().lname}}</h5>
+      }
+
+      <mat-nav-list>
+        @for( menu of menuItem(); track menu.id ){
+        <button routerLink={{menu.route}} mat-list-item [style.marginTop]="'15px'">
+          <mat-icon matListItemIcon>{{menu.icon}}</mat-icon>
+          @if(isOpened()){
+          <span matListItemTitle>{{menu.label}}</span>
+          }
+        </button>
+        }
+
+      </mat-nav-list>
+      <!--<app-dashboard-nav [isOpened]="isOpened()" [person]="authPerson()"></app-dashboard-nav>-->
+    </div>
+    <div class="logout mt-5" style="transform: rotateY(-180deg);" (click)="logout()">
+      <button>
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="content pt-5" [style.margin-left]=navWidth()>
+    <router-outlet [routerOutletData]="authPerson()"></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer></app-footer>
+
+
 
 

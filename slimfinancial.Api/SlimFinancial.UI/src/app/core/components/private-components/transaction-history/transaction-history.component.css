@@ -17,7 +17,7 @@
     padding-right: 24px;
     text-align: center;
 }
-.mat-column-Credit{
+.mat-column-Amount{
     width: 10vw;
     border-right: 1px solid currentColor;
     padding-right: 24px;
@@ -39,11 +39,10 @@
 }
 .mat-mdc-row{
     height: fit-content;
+    border-bottom: 1px solid black;
 }
 .mat-mdc-header-row {
     height: fit-content;
     text-align: center;
 }
-:host{
-    background-color: red;
-}
+

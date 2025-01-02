@@ -11,10 +11,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 const material = [
@@ -35,7 +36,7 @@ const material = [
   MatTableModule,
   MatSelectModule,
   MatInputModule,
-
+  MatPaginatorModule
 ]
 
 @NgModule({

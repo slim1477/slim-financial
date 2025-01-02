@@ -12,7 +12,7 @@ interface AuthUser{
 export class AuthService {
     private http = inject(HttpClient)
     private token : string  = '';
-    private static authPerson = ''
+    private authPerson = ''
     private endpoint: string = 'https://localhost:7177/api/Person/login'
 
     login(credentials: Credential) : Observable<any>{
@@ -21,7 +21,6 @@ export class AuthService {
 
     setToken(token: string): void {
       this.token = token;
-      AuthService.authPerson = (jwtDecode(this.token) as AuthUser).Person
       localStorage.setItem('sessionToken', token); 
     }
   
@@ -33,7 +32,9 @@ export class AuthService {
       this.token = '';
       localStorage.removeItem('sessionToken');
     }
-    static getAuthPerson(){
+  getAuthPerson() {
+    const token = localStorage.getItem('sessionToken');
+    this.authPerson = (jwtDecode(token!) as AuthUser).Person
         return this.authPerson
     }
  

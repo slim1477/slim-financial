@@ -13,20 +13,14 @@ import { LoginResponse } from '../core/common/models/login-response';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-// private authService = inject(AuthService)
 private token : string | null = null;
 private authService = new AuthService();
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-          // this.token = this.authService.getToken()
-          // console.log(request.url)
-          // this.token = new AuthService().getToken()
-          // const request2 = request.clone({headers: request.headers.set('Authorization',' Bearer  ' + this.token)})
-          // console.log("token from interceptor",this.token)
-          
+          // check if request is a login request
           if (request.url.endsWith('/login')) {
-            // For login requests, handle the token in the response
+            // if yes, handle the token in the response
             return next.handle(request).pipe(
               tap(event => {
                 if (event.type == HttpEventType.Response) {
@@ -53,7 +47,7 @@ private authService = new AuthService();
 
   
  
-  // if(HttpEventType.Response && request.url == 'https://localhost:7177/api/Person/login'){
+  // if(HttpEventType.Response && request.acctUrl == 'https://localhost:7177/api/Person/login'){
   //   console.log(Event.b)
   // }
 

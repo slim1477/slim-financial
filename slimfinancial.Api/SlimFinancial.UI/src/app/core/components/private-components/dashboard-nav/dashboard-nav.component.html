@@ -1,18 +1,18 @@
 
-<div class="container is-flex-direction-row is-justify-content-center ">
-    <div [class]="isOpened ?  'nav-header pt-3' : 'nav-header'" [style.height]="isOpened ? '10rem' : '3rem'" [style.width]="isOpened ? '10rem' : '3rem'">
-        <p [style.font-size] = "isOpened ? '50px':'15px'" [style.padding-top]="isOpened ? '5px':'10px'">SA</p>
+<div class="container is-flex-direction-row is-justify-content-center mb-5">
+    <div [class]="isOpened() ?  'nav-header pt-3' : 'nav-header'" [style.height]="isOpened() ? '10rem' : '3rem'" [style.width]="isOpened() ? '10rem' : '3rem'">
+        <p [style.font-size] = "isOpened() ? '50px':'15px'" [style.padding-top]="isOpened() ? '5px':'10px'">{{initials()}}</p>
     </div>
-    <h5 *ngIf="isOpened" class="ml-6">Seyi Agboola</h5>
+    <h5 *ngIf="isOpened()" class="ml-6">{{person().fname + " " + person().lname}}</h5>
     <!-- <div class="header-text mt-5 ">
-        <h4 *ngIf="isOpened">Seyi Agboola</h4>
+        <h4 *ngIf="isOpened()">Seyi Agboola</h4>
     </div> -->
     <hr [style.margin-left]="'2rem'" [style.margin-right]="'2rem'"/>
     <mat-nav-list>
         @for( menu of menuItem(); track menu.id ){
             <button routerLink = {{menu.route}} mat-list-item  [style.marginTop]="'15px'">
                 <mat-icon matListItemIcon>{{menu.icon}}</mat-icon>
-                <span *ngIf="isOpened" matListItemTitle>{{menu.label}}</span>
+                <span *ngIf="isOpened()" matListItemTitle>{{menu.label}}</span>
             </button>
         }
        

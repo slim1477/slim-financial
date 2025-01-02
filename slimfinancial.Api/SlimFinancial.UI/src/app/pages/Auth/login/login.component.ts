@@ -66,6 +66,5 @@ submitForm(){
       }
     }
   )
-  // console.log(this.loginForm.value)
 }
 }

@@ -1,13 +1,10 @@
-import { Component, inject, input, Signal, signal } from '@angular/core';
-
-import { FormControl, FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
+import { Component, inject, Signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ROUTER_OUTLET_DATA } from '@angular/router';
 import { MaterialModule } from '../../../common/material/material.module';
-import { ROUTER_CONFIGURATION, ROUTER_OUTLET_DATA } from '@angular/router';
+import { transfer } from '../../../common/models/transfer';
 
-interface transfer{
-  source: number,
-  destination : number[]
-}
+
 
 
 @Component({
@@ -19,7 +16,7 @@ interface transfer{
 })
 export class TransferComponent {
   transferData = inject(ROUTER_OUTLET_DATA) as Signal<transfer>
-//  test = this.transferData() as transfer
+
  
  
   regularTransferForm = new FormGroup({
@@ -29,10 +26,7 @@ export class TransferComponent {
     Amount : new FormControl('',[Validators.required])
   })
 
-showData(){
-  console.log(this.transferData())
-}
-show(){
-  console.log(this.regularTransferForm.value)
+  processTransaction() {
+    console.log('from transfer:',this.transferData().source)
 }
 }

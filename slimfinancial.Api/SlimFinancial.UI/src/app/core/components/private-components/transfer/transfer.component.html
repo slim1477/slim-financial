@@ -1,4 +1,3 @@
-
 <div class="container is-fluid mt-5">
     <div class="columns ">
         <div class="column is-one-fifth button-column">
@@ -7,7 +6,7 @@
             <button mat-raised-button>E-Transfer</button>
         </div>
         <div class="column mx-5 form-column">
-            <form [formGroup]="regularTransferForm" class="mb-5" (ngSubmit)="show()">
+            <form [formGroup]="regularTransferForm" class="mb-5" (ngSubmit)="processTransaction()">
                 <mat-label class="ml-3">Transfer To: </mat-label>
                 <mat-radio-group >
                 <mat-radio-button value="myAccount">My Account</mat-radio-button>
@@ -16,13 +15,13 @@
                
                 <mat-form-field class="mt-5">
                     <mat-label>From</mat-label>
-                    <input matInput [value]="transferData().source" (click)="showData()">
+                    <input matInput [value]="transferData().source.accountNumber">
                   </mat-form-field>
                   <mat-form-field >
                     <mat-label>To</mat-label>
                     <mat-select>
                       @for(acct of transferData().destination; track acct){
-                        <mat-option [value]="acct">{{acct}}</mat-option>
+                        <mat-option [value]="acct">{{acct.accountNumber}}</mat-option>
                       }
                       
                       <!-- <mat-option value="two">Second option</mat-option> -->
@@ -34,7 +33,6 @@
                   </mat-form-field>
                   <button mat-raised-button >Transfer</button>
             </form>
-            
         </div>
     </div>
 </div>
