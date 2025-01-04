@@ -10,6 +10,7 @@ export class AccountService {
   private http = inject(HttpClient);
   authUser = inject(AuthService).getAuthPerson()
   accounts = signal<Account[]>([])
+  transactions : Transaction[] = []
   private acctUrl: string = `https://localhost:7177/api/Account/${this.authUser}`
   private transactionUrl: string = 'https://localhost:7177/Api/Transaction'
 
@@ -21,34 +22,4 @@ export class AccountService {
     return this.http.get<Transaction[]>(this.transactionUrl.concat(`/${acct.accountNumber}`))
   }
 
-  setAccounts(acct: Account[]) {
-    this.accounts.set(acct);
-  }
-  //transactions = signal<Transaction[]>([
-  //  {
-  //    id: 1,
-  //    date: new Date(12 / 15 / 2024),
-  //    description: 'Payroll Deposit',
-  //    type: '',
-  //    Amount: 3000,
-  //    balance: 5000
-  //  },
-  //  {
-  //    id: 2,
-  //    date: new Date(12 / 15 / 2024),
-  //    description: 'Payroll Deposit',
-  //    type: '',
-  //    Amount: 3000,
-  //    balance: 5000
-  //  },
-  //  {
-  //    id: 3,
-  //    date: new Date(12 / 15 / 2024),
-  //    description: 'Payroll Deposit',
-  //    type: '',
-  //    Amount: 3000,
-  //    balance: 5000
-  //  }
-  //])
-  constructor() { }
 }

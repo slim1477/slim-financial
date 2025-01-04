@@ -1,5 +1,40 @@
-<div class="container m-3 has-background-primary">
-  <p>detail works!</p>
-  {{account().source | json}}
+<div class="container is-fluid m-3">
+  <div class="columns mt-5">
+    <div class="column is-one-fifth">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="content">{{account().source.type[0]}}</div>
+          <table>
+            <tr>
+              <td>Checking Account</td>
+            </tr>
+            <tr>
+              <td>Balance : {{account().source.balance | currency}}</td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="column info">
+      <table >
+        <tr>
+          <td>Account Number : {{account().source.accountNumber}}</td>
+        </tr>
+        <tr>
+          <td>Account Type : {{account().source.type}}</td>
+        </tr>
+        <tr>
+          <td>Interest rate : 0%</td>
+        </tr>
+        <tr>
+          <td>Available Balance : {{account().source.balance | currency}}</td>
+        </tr>
+        <tr>
+          <td>Account Status : {{account().source.status}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
 </div>
 

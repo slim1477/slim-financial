@@ -4,6 +4,7 @@ export interface Account {
   accountNumber: string;
   type: string;
   balance: number;
+  status: string;
   isCurrent: boolean
 }
 

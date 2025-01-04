@@ -1,13 +1,14 @@
 import { Component, inject, OnInit, Signal } from '@angular/core';
 import { ROUTER_OUTLET_DATA } from '@angular/router';
 import { Account } from '../../../common/models/account';
-import { JsonPipe } from '@angular/common';
+import { CurrencyPipe, JsonPipe } from '@angular/common';
 import { transfer } from '../../../common/models/transfer';
+import { MaterialModule } from '../../../common/material/material.module';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [ MaterialModule, CurrencyPipe],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
 })
