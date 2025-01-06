@@ -12,7 +12,7 @@
       </button>
       }
       <div class="mt-1">
-        <h5>Type: {{ account.type }}</h5>
+        <h5>Type: <span>{{ account.type }}</span> </h5>
         <h3>Balance: {{ account.balance | currency }}</h3>
         <h5>Account Number : {{ account.accountNumber }}</h5>
       </div>
@@ -45,9 +45,10 @@
     }
   </nav>
   <div class="tab-panel">
-    <mat-tab-nav-panel #tabPanel>
+    <mat-tab-nav-panel #tabPanel class="is-absolute">
       @if(showHistory()){
-      <table mat-table [dataSource]="transactions" [style.height]="'10rem'">
+      @defer{
+      <table mat-table [dataSource]="source" [style.height]="'10rem'">
         @for(header of tableHeader; track header){
         <ng-container [matColumnDef]="header.columnDef">
           <th mat-header-cell *matHeaderCellDef class="has-background-link">
@@ -61,14 +62,18 @@
 
         <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
         <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+
       </table>
-      <!--<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                     [pageSize]="5"
+
+      }@loading( minimum 3s){
+      <p class="has-text-centered p-5">loading ...</p>
+      }@error{
+      <p>there was an error ..</p>
+      }
+      <mat-paginator [pageSize]="9"
                      [length]="transactions.length"
-                     [pageIndex]="0"
-                     showFirstLastButtons
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>-->
+                     [pageIndex]="0">
+      </mat-paginator>
       }@else{
       <router-outlet [routerOutletData]="transferData()"></router-outlet>
       }

@@ -27,17 +27,16 @@ interface accountLinks {
 })
 
 // Represents the account page for user dashboard
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, AfterViewInit {
   service = inject(AccountService);
   accounts = signal<Account[]>([])
   currentAccount = signal<Account>(Object());
   errorMessage = signal<HttpErrorResponse>(Object())
   transferData = signal<transfer>(Object())
-  //transactions = signal<Transaction[]>([])
   transactions: Transaction[] = []
   showHistory = signal<boolean>(true)
-  source = new MatTableDataSource<Transaction>(this.transactions);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  source :MatTableDataSource<Transaction>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   links: accountLinks[] = [
     {
@@ -57,11 +56,6 @@ export class AccountComponent implements OnInit {
   tableHeaders = ['Date', 'Description', 'Amount', 'Balance']
 
   tableHeader = [
-    //{
-    //  columnDef: 'ID',
-    //  header: '#',
-    //  cell: (element: Transaction) => `${element.id}`,
-    //},
     {
       columnDef: 'Date',
       header: 'Date',
@@ -116,7 +110,12 @@ export class AccountComponent implements OnInit {
   setCurrentAccount(acct: Account) {
     this.service.getTransactions(acct).subscribe({
       next: (res) => this.transactions = res.reverse(),
-      complete: () => this.source.paginator = this.paginator
+      complete: () => {
+        console.log('Initialing source', new Date().getMilliseconds())
+        this.source = new MatTableDataSource<Transaction>(this.transactions)
+        console.log('source initialized', new Date().getMilliseconds())
+        this.source.paginator = this.paginator;
+        }
     })
     this.transferData.update(data => ({
       ...data,
@@ -133,6 +132,14 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetAccount()
+  }
+
+  ngAfterViewInit() {
+
+    setTimeout(() => {
+      this.source.paginator = this.paginator;
+    },3000)
+   
   }
 
 

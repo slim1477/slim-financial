@@ -12,7 +12,6 @@
 }
 .column:active {
   transform: scale(0.95);
-  /* background-color: yellow; */
 }
 .is-link {
   background-color: deepskyblue;
@@ -20,7 +19,8 @@
 .tab-panel {
   border: 2px solid darkblue;
   border-radius: 10px;
-   height: 55vh; 
+   height: 55vh;
+   position: relative;
 }
 .container {
   position: unset;
@@ -75,9 +75,13 @@
   padding:0px !important;
   background-color: blue;
 }
+mat-paginator{
+    background-color: transparent;
+    position: absolute;
+    bottom:0px!important;
+    right:30px;
+}
 
 
-/* mat-tab-nav-panel{
-    position: relative;
-    background-color: rebeccapurple !important;
-} */
+
+
